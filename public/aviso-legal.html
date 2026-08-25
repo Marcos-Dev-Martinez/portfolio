@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aviso Legal del portfolio de Marcos Martínez — Desarrollador Web.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://marcosmartinez-portfolio.web.app/aviso-legal.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#0A0F1E">
+  <title>Aviso Legal — Marcos Martínez</title>
+  <style>
+    /* ── Tipografías propias ────────────────────────────────────────
+       Antes se cargaban desde fonts.googleapis.com. Eso hacía que el
+       navegador de cada visitante conectara con servidores de Google y le
+       enviara su IP, sin consentimiento: es el motivo por el que un tribunal
+       alemán condenó ese uso en 2022 (LG München I, 3 O 17493/20).
+       Ahora las fuentes se sirven desde este mismo dominio: cero peticiones
+       a terceros. Inter y JetBrains Mono, licencia SIL Open Font 1.1
+       (ver fonts/LICENCIA-*.txt).
+       Si la carpeta /fonts no se sube, la web sigue viéndose bien con las
+       tipografías del sistema gracias a las alternativas del font-family. */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('fonts/inter-variable-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0A0F1E;
+      --bg-card:  #111827;
+      --blue:     #1E40AF;
+      --accent:   #3B82F6;
+      --accent2:  #60A5FA;
+      --text:     #F1F5F9;
+      --muted:    #94A3B8;
+      --border:   #1E293B;
+      --radius:   12px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 64px;
+      background: rgba(10,15,30,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-weight: 800; font-size: 1rem; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-back {
+      font-size: 0.875rem; color: var(--muted);
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--text); text-decoration: none; }
+
+    .hero {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 10%;
+    }
+    .hero-label {
+      font-size: 0.75rem; letter-spacing: 0.15em;
+      color: var(--accent); text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+    .hero p { color: var(--muted); font-size: 0.9rem; }
+
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h2 {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .card h3 {
+      font-size: 0.95rem; font-weight: 600;
+      margin: 1.2rem 0 0.4rem;
+      color: var(--text);
+    }
+    .card p, .card li {
+      font-size: 0.9rem; color: var(--muted);
+      line-height: 1.75;
+    }
+    .card ul { padding-left: 1.4rem; margin-top: 0.5rem; }
+    .card li { margin-bottom: 0.35rem; }
+    .card strong { color: var(--text); }
+    .card a { color: var(--accent); }
+
+    .card code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.85em;
+      background: rgba(59,130,246,0.10);
+      border: 1px solid rgba(59,130,246,0.20);
+      border-radius: 4px;
+      padding: 0.1em 0.35em;
+      color: var(--accent2, #60A5FA);
+    }
+
+    .highlight {
+      background: rgba(59,130,246,0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 0.9rem 1.2rem;
+      margin: 1rem 0;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .highlight strong { color: var(--text); }
+
+    .update-box {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); }
+
+
+    /* ── Foco visible (WCAG 2.1 AA — 2.4.7) ─────────────────────── */
+    :focus-visible {
+      outline: 3px solid #60A5FA;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    /* ── Saltar al contenido (WCAG 2.1 nivel A — 2.4.1) ─────────── */
+    .skip-link {
+      position: absolute; left: 50%; top: 0;
+      transform: translate(-50%, -120%);
+      z-index: 200;
+      background: var(--accent); color: #0A0F1E;
+      font-weight: 700; font-size: 0.9rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0 0 8px 8px;
+      transition: transform .2s;
+    }
+    .skip-link:focus { transform: translate(-50%, 0); }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main { padding: 2.5rem 1rem; }
+      .hero { padding: 2rem 5%; }
+      .card { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#contenido" class="skip-link">Saltar al contenido principal</a>
+
+<nav aria-label="Navegación principal">
+  <a href="index.html" class="nav-logo">Marcos<span>.</span></a>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Volver al portfolio
+  </a>
+</nav>
+
+<div class="hero">
+  <p class="hero-label">Legal</p>
+  <h1>Aviso Legal</h1>
+  <p>Última actualización: agosto de 2026 · Conforme a la Ley 34/2002 (LSSI-CE) y normativa vigente</p>
+</div>
+
+<main id="contenido">
+
+  <!-- 1. Titular -->
+  <div class="card">
+    <h2>🧑‍💼 1. Datos identificativos del titular</h2>
+    <p>En cumplimiento del artículo 10 de la <strong>Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE)</strong>, se facilitan los siguientes datos del titular del sitio web:</p>
+    <div class="highlight">
+      <strong>Nombre:</strong> Marcos Martínez<br>
+      <strong>Correo electrónico:</strong> <a href="mailto:marcos.dev.martinez@gmail.com">marcos.dev.martinez@gmail.com</a><br>
+      <strong>Ubicación:</strong> Valencia, España<br>
+      <strong>Naturaleza:</strong> Persona física — Portfolio profesional personal, sin actividad comercial
+    </div>
+  </div>
+
+  <!-- 2. Objeto -->
+  <div class="card">
+    <h2>🌐 2. Objeto y ámbito de aplicación</h2>
+    <p>El presente Aviso Legal regula el acceso y uso del sitio web de portfolio personal de <strong>Marcos Martínez</strong>, desarrollador web, cuyo objeto es la presentación de su perfil profesional, habilidades técnicas y proyectos realizados.</p>
+    <p style="margin-top:.75rem">El acceso al sitio web es gratuito y no requiere registro previo. El uso de este sitio implica la aceptación plena de las condiciones recogidas en este Aviso Legal.</p>
+  </div>
+
+  <!-- 3. Propiedad intelectual -->
+  <div class="card">
+    <h2>©️ 3. Propiedad intelectual e industrial</h2>
+    <p>Todos los contenidos del sitio web — incluyendo, a título enunciativo, textos, código fuente, diseño gráfico, imágenes, logotipos y estructura — son titularidad de <strong>Marcos Martínez</strong> o se usan con autorización, y están protegidos por la legislación española e internacional sobre propiedad intelectual e industrial.</p>
+
+    <h3>Queda expresamente prohibido:</h3>
+    <ul>
+      <li>Reproducir, distribuir, comunicar públicamente o transformar total o parcialmente los contenidos sin autorización escrita previa del titular.</li>
+      <li>Usar los contenidos con fines comerciales sin consentimiento expreso.</li>
+      <li>Suprimir o manipular los avisos de derechos de propiedad intelectual.</li>
+    </ul>
+
+    <h3>Contenidos de terceros:</h3>
+    <p>Las capturas de pantalla de proyectos son obras propias del autor. Las tipografías utilizadas (<strong>Inter</strong> y <strong>JetBrains Mono</strong>) se distribuyen bajo licencia <a href="https://openfontlicense.org/" target="_blank" rel="noopener noreferrer"><strong>SIL Open Font License 1.1</strong></a> y se sirven desde este mismo dominio, no desde Google Fonts. El texto completo de ambas licencias se distribuye junto a los archivos de fuente.</p>
+  </div>
+
+  <!-- 4. Responsabilidad -->
+  <div class="card">
+    <h2>⚠️ 4. Exención de responsabilidad</h2>
+
+    <h3>Disponibilidad del sitio:</h3>
+    <p>El titular no garantiza la disponibilidad continua e ininterrumpida del sitio web. Se reserva el derecho a suspender, modificar o eliminar el sitio o sus contenidos sin previo aviso, sin que ello genere responsabilidad alguna.</p>
+
+    <h3>Exactitud de la información:</h3>
+    <p>El titular procura mantener actualizada la información publicada, pero no garantiza su exactitud, exhaustividad o actualidad. La información tiene carácter meramente orientativo e informativo.</p>
+
+    <h3>Enlaces a terceros:</h3>
+    <p>El sitio puede contener enlaces a páginas web de terceros (proyectos publicados, recursos externos). El titular no se responsabiliza del contenido, políticas de privacidad ni funcionamiento de dichos sitios, que se rigen por sus propios términos legales.</p>
+
+    <h3>Uso del sitio:</h3>
+    <p>El usuario se compromete a hacer un uso lícito del sitio web, sin vulnerar derechos de terceros ni infringir la normativa vigente. Queda prohibido cualquier uso del sitio con fines ilícitos, fraudulentos o que puedan causar daños.</p>
+  </div>
+
+  <!-- 5. Protección de datos -->
+  <div class="card">
+    <h2>🔒 5. Protección de datos personales</h2>
+    <p>El tratamiento de datos personales que pudiera realizarse a través del formulario de contacto se rige por la <a href="politica-privacidad.html"><strong>Política de Privacidad</strong></a> de este sitio web, conforme al <strong>Reglamento (UE) 2016/679 (RGPD)</strong> y la <strong>Ley Orgánica 3/2018 (LOPDGDD)</strong>.</p>
+  </div>
+
+  <!-- 6. Cookies -->
+  <div class="card">
+    <h2>🍪 6. Política de cookies</h2>
+    <p>Este sitio web <strong>no utiliza cookies</strong> propias ni de terceros, ni analíticas ni publicitarias, y tampoco emplea almacenamiento local del navegador, píxeles de seguimiento ni técnicas de identificación por huella digital.</p>
+    <p style="margin-top:.75rem">Al no instalarse ningún dispositivo de almacenamiento o recuperación de datos en el equipo del usuario, no resulta exigible el consentimiento previo del <strong>artículo 22.2 de la LSSI-CE</strong> y el sitio no muestra banner de cookies.</p>
+    <p style="margin-top:.75rem">Las tipografías (Inter y JetBrains Mono) se sirven <strong>desde este mismo dominio</strong>, no desde Google Fonts, de forma que la navegación no genera conexiones con servidores de terceros.</p>
+    <div class="highlight">
+      El detalle completo —qué es una cookie, por qué este sitio no usa ninguna, qué conexiones externas existen y cómo gestionarlas en tu navegador— está en la
+      <a href="politica-cookies.html"><strong>Política de Cookies</strong></a>.
+    </div>
+  </div>
+
+  <!-- 7. Accesibilidad -->
+  <div class="card">
+    <h2>♿ 7. Accesibilidad</h2>
+    <p>Este sitio web está desarrollado conforme a las pautas de accesibilidad <strong>WCAG 2.1 nivel AA</strong>, en virtud de la <strong>Directiva (UE) 2016/2102</strong> del Parlamento Europeo y del Consejo sobre accesibilidad de sitios web.</p>
+    <p style="margin-top:.75rem">Se han implementado las siguientes medidas de accesibilidad:</p>
+    <ul>
+      <li>Uso de HTML semántico y atributos ARIA.</li>
+      <li>Texto alternativo en todas las imágenes informativas.</li>
+      <li>Contraste de color suficiente entre texto y fondo.</li>
+      <li>Navegación accesible por teclado.</li>
+      <li>Formulario con etiquetas asociadas correctamente.</li>
+      <li>Respeto a las preferencias de movimiento reducido del sistema (<code>prefers-reduced-motion</code>).</li>
+    </ul>
+    <p style="margin-top:.75rem">Si detectas algún problema de accesibilidad, puedes comunicarlo a <a href="mailto:marcos.dev.martinez@gmail.com">marcos.dev.martinez@gmail.com</a>.</p>
+  </div>
+
+  <!-- 8. Legislación aplicable -->
+  <div class="card">
+    <h2>⚖️ 8. Legislación aplicable y jurisdicción</h2>
+    <p>El presente Aviso Legal se rige por la legislación española y europea vigente, en particular:</p>
+    <ul>
+      <li><strong>Ley 34/2002 (LSSI-CE)</strong> — Servicios de la sociedad de la información.</li>
+      <li><strong>Reglamento (UE) 2016/679 (RGPD)</strong> — Protección de datos.</li>
+      <li><strong>Ley Orgánica 3/2018 (LOPDGDD)</strong> — Protección de datos nacional.</li>
+      <li><strong>Directiva (UE) 2016/2102</strong> — Accesibilidad web.</li>
+      <li><strong>Real Decreto Legislativo 1/1996</strong> — Ley de Propiedad Intelectual.</li>
+    </ul>
+    <p style="margin-top:.75rem">Para la resolución de cualquier controversia derivada del acceso o uso de este sitio web, las partes se someten a los <strong>Juzgados y Tribunales de Valencia (España)</strong>, con renuncia expresa a cualquier otro fuero que pudiera corresponderles.</p>
+  </div>
+
+  <div class="update-box">
+    <strong>Aviso Legal</strong> · Versión 1.2 · Agosto 2026<br>
+    El titular se reserva el derecho a modificar este aviso legal en cualquier momento. La fecha de última actualización se indica en la cabecera.
+  </div>
+
+</main>
+
+<footer>
+  <p>© <span id="year">2026</span> Marcos Martínez ·
+    <a href="index.html">Portfolio</a> ·
+    <a href="aviso-legal.html">Aviso Legal</a> ·
+    <a href="politica-privacidad.html">Política de Privacidad</a> ·
+    <a href="politica-cookies.html">Política de Cookies</a>
+  </p>
+</footer>
+
+<script>
+  // Mantiene el año del copyright al día. El 2026 del HTML es el respaldo
+  // por si el JavaScript no se ejecuta.
+  (function () {
+    try {
+      var y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    } catch (e) {}
+  })();
+</script>
+
+</body>
+</html>

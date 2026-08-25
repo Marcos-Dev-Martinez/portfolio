@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Política de Privacidad de Marcos Martínez — Desarrollador Web.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://marcosmartinez-portfolio.web.app/politica-privacidad.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#0A0F1E">
+  <title>Política de Privacidad — Marcos Martínez</title>
+  <style>
+    /* ── Tipografías propias ────────────────────────────────────────
+       Antes se cargaban desde fonts.googleapis.com. Eso hacía que el
+       navegador de cada visitante conectara con servidores de Google y le
+       enviara su IP, sin consentimiento: es el motivo por el que un tribunal
+       alemán condenó ese uso en 2022 (LG München I, 3 O 17493/20).
+       Ahora las fuentes se sirven desde este mismo dominio: cero peticiones
+       a terceros. Inter y JetBrains Mono, licencia SIL Open Font 1.1
+       (ver fonts/LICENCIA-*.txt).
+       Si la carpeta /fonts no se sube, la web sigue viéndose bien con las
+       tipografías del sistema gracias a las alternativas del font-family. */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('fonts/inter-variable-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0A0F1E;
+      --bg-card:  #111827;
+      --blue:     #1E40AF;
+      --accent:   #3B82F6;
+      --accent2:  #60A5FA;
+      --text:     #F1F5F9;
+      --muted:    #94A3B8;
+      --border:   #1E293B;
+      --radius:   12px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 64px;
+      background: rgba(10,15,30,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-weight: 800; font-size: 1rem; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-back {
+      font-size: 0.875rem; color: var(--muted);
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--text); text-decoration: none; }
+
+    .hero {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 10%;
+    }
+    .hero-label {
+      font-size: 0.75rem; letter-spacing: 0.15em;
+      color: var(--accent); text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+    .hero p { color: var(--muted); font-size: 0.9rem; }
+
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h2 {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .card h3 {
+      font-size: 0.95rem; font-weight: 600;
+      margin: 1.2rem 0 0.4rem;
+      color: var(--text);
+    }
+    .card p, .card li {
+      font-size: 0.9rem; color: var(--muted);
+      line-height: 1.75;
+    }
+    .card ul, .card ol {
+      padding-left: 1.4rem;
+      margin-top: 0.5rem;
+    }
+    .card li { margin-bottom: 0.35rem; }
+    .card strong { color: var(--text); }
+    .card a { color: var(--accent); }
+
+    .card code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.85em;
+      background: rgba(59,130,246,0.10);
+      border: 1px solid rgba(59,130,246,0.20);
+      border-radius: 4px;
+      padding: 0.1em 0.35em;
+      color: var(--accent2, #60A5FA);
+    }
+
+    .highlight {
+      background: rgba(59,130,246,0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 0.9rem 1.2rem;
+      margin: 1rem 0;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .highlight strong { color: var(--text); }
+
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .right-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+    .right-item .right-title {
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--text); margin-bottom: 0.3rem;
+    }
+    .right-item p {
+      font-size: 0.78rem; color: var(--muted);
+      margin: 0;
+    }
+
+    .update-box {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); }
+
+
+    /* ── Foco visible (WCAG 2.1 AA — 2.4.7) ─────────────────────── */
+    :focus-visible {
+      outline: 3px solid #60A5FA;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    /* ── Saltar al contenido (WCAG 2.1 nivel A — 2.4.1) ─────────── */
+    .skip-link {
+      position: absolute; left: 50%; top: 0;
+      transform: translate(-50%, -120%);
+      z-index: 200;
+      background: var(--accent); color: #0A0F1E;
+      font-weight: 700; font-size: 0.9rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0 0 8px 8px;
+      transition: transform .2s;
+    }
+    .skip-link:focus { transform: translate(-50%, 0); }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main { padding: 2.5rem 1rem; }
+      .hero { padding: 2rem 5%; }
+      .card { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#contenido" class="skip-link">Saltar al contenido principal</a>
+
+<nav aria-label="Navegación principal">
+  <a href="index.html" class="nav-logo">Marcos<span>.</span></a>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Volver al portfolio
+  </a>
+</nav>
+
+<div class="hero">
+  <p class="hero-label">Legal</p>
+  <h1>Política de Privacidad</h1>
+  <p>Última actualización: agosto de 2026 · Conforme al Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD)</p>
+</div>
+
+<main id="contenido">
+
+  <!-- 1. Responsable -->
+  <div class="card">
+    <h2>🧑‍💼 1. Responsable del tratamiento</h2>
+    <p>En cumplimiento del artículo 13 del <strong>Reglamento General de Protección de Datos (RGPD)</strong>, se informa de los siguientes datos del responsable:</p>
+    <div class="highlight">
+      <strong>Identidad:</strong> Marcos Martínez<br>
+      <strong>Correo electrónico:</strong> <a href="mailto:marcos.dev.martinez@gmail.com">marcos.dev.martinez@gmail.com</a><br>
+      <strong>Ubicación:</strong> Valencia, España<br>
+      <strong>Actividad:</strong> Desarrollador web (persona física, actividad no comercial)
+    </div>
+  </div>
+
+  <!-- 2. Datos recabados -->
+  <div class="card">
+    <h2>📋 2. Datos personales que se recaban</h2>
+    <p>A través del formulario de contacto de este sitio web se pueden recopilar los siguientes datos:</p>
+    <ul>
+      <li><strong>Nombre:</strong> para identificar al remitente del mensaje.</li>
+      <li><strong>Dirección de correo electrónico:</strong> para poder responder a la consulta.</li>
+      <li><strong>Asunto y mensaje:</strong> contenido de la consulta planteada.</li>
+    </ul>
+    <p style="margin-top:.75rem">Este sitio web <strong>no utiliza cookies</strong> propias ni de terceros, no instala rastreadores ni almacenamiento local en el navegador, y no recaba datos de navegación. Las tipografías se sirven desde este mismo dominio, de modo que la navegación no comunica tu dirección IP a ningún tercero. Tienes el detalle en la <a href="politica-cookies.html"><strong>Política de Cookies</strong></a>.</p>
+  </div>
+
+  <!-- 3. Finalidad -->
+  <div class="card">
+    <h2>🎯 3. Finalidad del tratamiento</h2>
+    <p>Los datos recabados se utilizan exclusivamente para:</p>
+    <ul>
+      <li>Atender y responder las consultas, propuestas o colaboraciones enviadas a través del formulario de contacto.</li>
+      <li>Mantener comunicación con el interesado en relación con su consulta.</li>
+    </ul>
+    <p style="margin-top:.75rem"><strong>No se elaborarán perfiles</strong>, no se tomará ninguna decisión automatizada y los datos no se utilizarán para ningún fin distinto al indicado sin consentimiento previo.</p>
+  </div>
+
+  <!-- 4. Legitimación -->
+  <div class="card">
+    <h2>⚖️ 4. Base legal del tratamiento</h2>
+    <p>La base jurídica del tratamiento es el <strong>consentimiento expreso del interesado</strong>, prestado mediante la marcación de la casilla de aceptación en el formulario de contacto, de conformidad con el <strong>artículo 6.1.a) del RGPD</strong>.</p>
+    <p style="margin-top:.75rem">El consentimiento puede retirarse en cualquier momento sin que ello afecte a la licitud del tratamiento previo a su retirada.</p>
+  </div>
+
+  <!-- 5. Conservación -->
+  <div class="card">
+    <h2>🗓️ 5. Plazo de conservación</h2>
+    <p>Los datos se conservarán durante el tiempo necesario para atender la consulta y, en su caso, durante el periodo en que puedan derivarse responsabilidades legales, con un máximo de <strong>3 años</strong> desde la última comunicación, salvo obligación legal de conservación por un periodo superior.</p>
+    <p style="margin-top:.75rem">Transcurrido dicho plazo, los datos serán eliminados de forma segura.</p>
+  </div>
+
+  <!-- 6. Destinatarios y encargados -->
+  <div class="card">
+    <h2>🔒 6. Destinatarios de los datos</h2>
+    <p>Los datos personales <strong>no se ceden a terceros</strong> para finalidades propias de estos, salvo en los casos previstos legalmente:</p>
+    <ul>
+      <li>Cuando exista una obligación legal que lo exija.</li>
+      <li>Cuando el interesado haya prestado su consentimiento expreso para ello.</li>
+    </ul>
+
+    <h3>Encargado del tratamiento</h3>
+    <p>
+      El formulario de contacto se procesa a través de <strong>Formspree</strong>
+      (Formspree Inc.), proveedor que actúa como <strong>encargado del tratamiento</strong>
+      conforme al artículo 28 del RGPD y que trata los datos únicamente siguiendo las
+      instrucciones del responsable, sin usarlos para fines propios.
+    </p>
+    <p style="margin-top:.75rem">
+      Este proveedor interviene <strong>solo en el momento del envío</strong> del
+      formulario: la simple navegación por el sitio no comunica ningún dato a terceros.
+    </p>
+
+    <h3>Transferencias internacionales</h3>
+    <div class="highlight">
+      La infraestructura de Formspree está alojada en <strong>Amazon Web Services en
+      Estados Unidos</strong>, por lo que el envío del formulario implica una
+      <strong>transferencia internacional de datos fuera del Espacio Económico
+      Europeo</strong>. Dicha transferencia se ampara en las <strong>cláusulas
+      contractuales tipo</strong> aprobadas por la Comisión Europea, conforme al
+      <strong>artículo 46.2.c) del RGPD</strong>.
+    </div>
+    <p>
+      Si prefieres no utilizar el formulario, puedes escribir directamente a
+      <a href="mailto:marcos.dev.martinez@gmail.com">marcos.dev.martinez@gmail.com</a>.
+    </p>
+  </div>
+
+  <!-- 7. Derechos -->
+  <div class="card">
+    <h2>✅ 7. Derechos del interesado</h2>
+    <p>De conformidad con el RGPD y la LOPDGDD, el interesado puede ejercer los siguientes derechos:</p>
+    <div class="rights-grid">
+      <div class="right-item">
+        <div class="right-title">🔍 Acceso</div>
+        <p>Conocer qué datos personales tuyos se están tratando.</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">✏️ Rectificación</div>
+        <p>Solicitar la corrección de datos inexactos o incompletos.</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">🗑️ Supresión</div>
+        <p>Solicitar la eliminación de tus datos («derecho al olvido»).</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">⏸️ Limitación</div>
+        <p>Solicitar la restricción del tratamiento de tus datos.</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">📦 Portabilidad</div>
+        <p>Recibir tus datos en un formato estructurado y legible.</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">🚫 Oposición</div>
+        <p>Oponerte al tratamiento de tus datos en cualquier momento.</p>
+      </div>
+    </div>
+    <div class="highlight" style="margin-top:1.25rem">
+      Para ejercer cualquiera de estos derechos, envía un correo a
+      <strong><a href="mailto:marcos.dev.martinez@gmail.com">marcos.dev.martinez@gmail.com</a></strong>
+      indicando el derecho que deseas ejercer y adjuntando una copia de tu documento de identidad.
+      Se responderá en un plazo máximo de <strong>30 días</strong>.
+    </div>
+    <p>Si consideras que el tratamiento no se ajusta a la normativa vigente, tienes derecho a presentar una reclamación ante la <strong><a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">Agencia Española de Protección de Datos (AEPD)</a></strong>.</p>
+  </div>
+
+  <!-- 8. Seguridad -->
+  <div class="card">
+    <h2>🛡️ 8. Medidas de seguridad</h2>
+    <p>Se aplican las medidas técnicas y organizativas adecuadas para garantizar la seguridad de los datos personales y evitar su alteración, pérdida, tratamiento o acceso no autorizado, habida cuenta del estado de la tecnología, la naturaleza de los datos almacenados y los riesgos a que están expuestos.</p>
+  </div>
+
+  <!-- 9. Accesibilidad -->
+  <div class="card">
+    <h2>♿ 9. Accesibilidad web</h2>
+    <p>Este sitio web está desarrollado siguiendo las pautas de accesibilidad <strong>WCAG 2.1 nivel AA</strong>, conforme a la <strong>Directiva (UE) 2016/2102</strong> del Parlamento Europeo y del Consejo, relativa a la accesibilidad de los sitios web y aplicaciones para dispositivos móviles de los organismos del sector público.</p>
+  </div>
+
+  <div class="update-box">
+    <strong>Política de privacidad</strong> · Versión 1.2 · Agosto 2026<br>
+    Esta política puede actualizarse. La fecha de última revisión se indica en la cabecera.
+  </div>
+
+</main>
+
+<footer>
+  <p>© <span id="year">2026</span> Marcos Martínez ·
+    <a href="index.html">Portfolio</a> ·
+    <a href="aviso-legal.html">Aviso Legal</a> ·
+    <a href="politica-privacidad.html">Política de Privacidad</a> ·
+    <a href="politica-cookies.html">Política de Cookies</a>
+  </p>
+</footer>
+
+<script>
+  // Mantiene el año del copyright al día. El 2026 del HTML es el respaldo
+  // por si el JavaScript no se ejecuta.
+  (function () {
+    try {
+      var y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    } catch (e) {}
+  })();
+</script>
+
+</body>
+</html>

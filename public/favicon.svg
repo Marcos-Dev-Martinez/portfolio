@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Marcos Martínez">
+  <rect width="64" height="64" rx="14" fill="#0A0F1E"/>
+  <g transform="translate(-0.2 3.6) scale(0.86)">
+    <path d="M13 47V17h7.6l11.4 17.4L43.4 17H51v30h-7.4V29.6L33.9 44.3h-3.8L20.4 29.6V47z" fill="#F1F5F9"/>
+  </g>
+  <circle cx="51.5" cy="43.8" r="4.6" fill="#3B82F6"/>
+</svg>

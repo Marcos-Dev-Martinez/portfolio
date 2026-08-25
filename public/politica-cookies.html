@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Política de Cookies del portfolio de Marcos Martínez. Este sitio no utiliza cookies de ningún tipo.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://marcosmartinez-portfolio.web.app/politica-cookies.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#0A0F1E">
+  <title>Política de Cookies — Marcos Martínez</title>
+  <style>
+    /* ── Tipografías propias ────────────────────────────────────────
+       Antes se cargaban desde fonts.googleapis.com. Eso hacía que el
+       navegador de cada visitante conectara con servidores de Google y le
+       enviara su IP, sin consentimiento: es el motivo por el que un tribunal
+       alemán condenó ese uso en 2022 (LG München I, 3 O 17493/20).
+       Ahora las fuentes se sirven desde este mismo dominio: cero peticiones
+       a terceros. Inter y JetBrains Mono, licencia SIL Open Font 1.1
+       (ver fonts/LICENCIA-*.txt).
+       Si la carpeta /fonts no se sube, la web sigue viéndose bien con las
+       tipografías del sistema gracias a las alternativas del font-family. */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('fonts/inter-variable-latin.woff2') format('woff2');
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0A0F1E;
+      --bg-card:  #111827;
+      --blue:     #1E40AF;
+      --accent:   #3B82F6;
+      --accent2:  #60A5FA;
+      --text:     #F1F5F9;
+      --muted:    #94A3B8;
+      --border:   #1E293B;
+      --radius:   12px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 64px;
+      background: rgba(10,15,30,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-weight: 800; font-size: 1rem; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-back {
+      font-size: 0.875rem; color: var(--muted);
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--text); text-decoration: none; }
+
+    .hero {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 10%;
+    }
+    .hero-label {
+      font-size: 0.75rem; letter-spacing: 0.15em;
+      color: var(--accent); text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+    .hero p { color: var(--muted); font-size: 0.9rem; }
+
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h2 {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .card h3 {
+      font-size: 0.95rem; font-weight: 600;
+      margin: 1.2rem 0 0.4rem;
+      color: var(--text);
+    }
+    .card p, .card li {
+      font-size: 0.9rem; color: var(--muted);
+      line-height: 1.75;
+    }
+    .card ul { padding-left: 1.4rem; margin-top: 0.5rem; }
+    .card li { margin-bottom: 0.35rem; }
+    .card strong { color: var(--text); }
+    .card a { color: var(--accent); }
+
+    .card code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.85em;
+      background: rgba(59,130,246,0.10);
+      border: 1px solid rgba(59,130,246,0.20);
+      border-radius: 4px;
+      padding: 0.1em 0.35em;
+      color: var(--accent2, #60A5FA);
+    }
+
+    .highlight {
+      background: rgba(59,130,246,0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 0.9rem 1.2rem;
+      margin: 1rem 0;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .highlight strong { color: var(--text); }
+
+    .update-box {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); }
+
+
+    /* ── Foco visible (WCAG 2.1 AA — 2.4.7) ─────────────────────── */
+    :focus-visible {
+      outline: 3px solid #60A5FA;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    /* ── Saltar al contenido (WCAG 2.1 nivel A — 2.4.1) ─────────── */
+    .skip-link {
+      position: absolute; left: 50%; top: 0;
+      transform: translate(-50%, -120%);
+      z-index: 200;
+      background: var(--accent); color: #0A0F1E;
+      font-weight: 700; font-size: 0.9rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0 0 8px 8px;
+      transition: transform .2s;
+    }
+    .skip-link:focus { transform: translate(-50%, 0); }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main { padding: 2.5rem 1rem; }
+      .hero { padding: 2rem 5%; }
+      .card { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#contenido" class="skip-link">Saltar al contenido principal</a>
+
+<nav aria-label="Navegación principal">
+  <a href="index.html" class="nav-logo">Marcos<span>.</span></a>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Volver al portfolio
+  </a>
+</nav>
+
+<div class="hero">
+  <p class="hero-label">Legal</p>
+  <h1>Política de Cookies</h1>
+  <p>Última actualización: agosto de 2026 · Conforme al art. 22.2 de la Ley 34/2002 (LSSI-CE), la Directiva 2002/58/CE y el Reglamento (UE) 2016/679 (RGPD)</p>
+</div>
+
+<main id="contenido">
+
+  <!-- Resumen -->
+  <div class="card">
+    <h2>🍪 En resumen</h2>
+    <div class="highlight">
+      <strong>Este sitio web no utiliza cookies.</strong> Ni propias, ni de terceros, ni
+      analíticas, ni publicitarias. Tampoco usa <code>localStorage</code>,
+      <code>sessionStorage</code>, píxeles de seguimiento ni huellas digitales de
+      navegador (<em>fingerprinting</em>).
+    </div>
+    <p>
+      Por eso no verás ningún banner de cookies al entrar: no hay nada que consentir.
+      Esta página existe para explicarte con detalle qué significa eso y por qué es así.
+    </p>
+  </div>
+
+  <!-- 1. Qué son -->
+  <div class="card">
+    <h2>📖 1. Qué es una cookie</h2>
+    <p>
+      Una <strong>cookie</strong> es un pequeño archivo de texto que un sitio web guarda en
+      tu dispositivo (ordenador, móvil o tableta) cuando lo visitas. Al volver, el sitio
+      puede leer ese archivo y reconocerte.
+    </p>
+    <p style="margin-top:.75rem">
+      Las cookies tienen usos legítimos —mantener tu sesión abierta, recordar el idioma que
+      elegiste— y otros más invasivos, como seguir tu recorrido entre distintas webs para
+      construir un perfil publicitario.
+    </p>
+    <p style="margin-top:.75rem">
+      La normativa no se limita a las cookies: el <strong>artículo 22.2 de la LSSI-CE</strong>
+      habla de cualquier «dispositivo de almacenamiento y recuperación de datos» en el equipo
+      del usuario. Eso incluye también el almacenamiento local del navegador
+      (<code>localStorage</code>, <code>sessionStorage</code>, IndexedDB) y técnicas
+      equivalentes de identificación.
+    </p>
+  </div>
+
+  <!-- 2. Cookies que usa este sitio -->
+  <div class="card">
+    <h2>🚫 2. Cookies que utiliza este sitio</h2>
+    <p><strong>Ninguna.</strong> Este portfolio no instala ningún archivo ni identificador en tu dispositivo:</p>
+    <ul>
+      <li><strong>Cookies propias:</strong> ninguna.</li>
+      <li><strong>Cookies de terceros:</strong> ninguna.</li>
+      <li><strong>Cookies analíticas o de medición de audiencia:</strong> ninguna. No hay Google Analytics ni ninguna herramienta equivalente.</li>
+      <li><strong>Cookies publicitarias o de perfilado:</strong> ninguna.</li>
+      <li><strong>Almacenamiento local</strong> (<code>localStorage</code>, <code>sessionStorage</code>, IndexedDB)<strong>:</strong> no se utiliza.</li>
+      <li><strong>Píxeles de seguimiento, balizas web o <em>fingerprinting</em>:</strong> no se utilizan.</li>
+    </ul>
+    <p style="margin-top:.75rem">
+      Al no almacenarse nada, <strong>no hay plazo de conservación</strong> que declarar: no
+      queda ningún rastro en tu equipo después de la visita.
+    </p>
+  </div>
+
+  <!-- 3. Por qué no hay banner -->
+  <div class="card">
+    <h2>✅ 3. Por qué no hay banner de cookies</h2>
+    <p>
+      El <strong>artículo 22.2 de la LSSI-CE</strong> —que traspone el artículo 5.3 de la
+      <strong>Directiva 2002/58/CE</strong> (ePrivacy)— exige informar y obtener el
+      consentimiento del usuario antes de almacenar o recuperar datos en su dispositivo,
+      <em>salvo</em> cuando ese almacenamiento sea estrictamente necesario para prestar un
+      servicio expresamente solicitado.
+    </p>
+    <p style="margin-top:.75rem">
+      Dicho de otro modo: <strong>la obligación de pedir consentimiento nace de usar
+      cookies</strong>. Como aquí no se usa ninguna, no hay consentimiento que recabar y un
+      banner sería superfluo. Mostrar un aviso donde no hay tratamiento induce a error sobre
+      lo que realmente hace el sitio.
+    </p>
+    <div class="highlight">
+      <strong>Si esto cambia:</strong> si en el futuro se incorpora cualquier herramienta que
+      instale cookies no exentas —analítica, mapas de calor, vídeo incrustado, publicidad—,
+      se implantará un mecanismo de consentimiento previo, granular y con la opción de
+      rechazar tan accesible como la de aceptar, y esta página se actualizará antes de
+      activarlo.
+    </div>
+  </div>
+
+  <!-- 4. Conexiones a terceros -->
+  <div class="card">
+    <h2>🌐 4. Conexiones con servidores de terceros</h2>
+    <p>
+      Aunque no haya cookies, cargar recursos alojados fuera del sitio hace que tu navegador
+      se conecte a servidores ajenos y les revele tu dirección IP. Por eso también se ha
+      reducido eso al mínimo:
+    </p>
+
+    <h3>Tipografías: alojadas en este mismo dominio</h3>
+    <p>
+      Las fuentes <strong>Inter</strong> y <strong>JetBrains Mono</strong> (licencia
+      <a href="https://openfontlicense.org/" target="_blank" rel="noopener noreferrer">SIL Open Font License 1.1</a>)
+      se sirven desde este servidor. <strong>No se cargan desde Google Fonts</strong>, de modo
+      que tu navegador no conecta con servidores de Google ni les comunica tu IP al visitar
+      esta web.
+    </p>
+
+    <h3>Formulario de contacto</h3>
+    <p>
+      El formulario de la página de inicio se procesa mediante <strong>Formspree</strong>
+      (Formspree Inc.), que actúa como <strong>encargado del tratamiento</strong>. Este
+      servicio <strong>solo interviene cuando pulsas «Enviar mensaje»</strong>: navegar por
+      la web sin usar el formulario no genera ninguna conexión con él. Formspree no instala
+      cookies en este sitio.
+    </p>
+    <div class="highlight">
+      <strong>Transferencia internacional:</strong> la infraestructura de Formspree está
+      alojada en Amazon Web Services en <strong>Estados Unidos</strong>. Por tanto, al enviar
+      el formulario se produce una transferencia internacional de datos, amparada en las
+      <strong>cláusulas contractuales tipo</strong> aprobadas por la Comisión Europea
+      (art. 46.2.c del RGPD). Tienes el detalle en la
+      <a href="politica-privacidad.html">Política de Privacidad</a>.
+    </div>
+
+    <h3>Enlaces salientes</h3>
+    <p>
+      La sección de proyectos enlaza a sitios externos alojados en Firebase. Esos enlaces
+      solo se siguen si haces clic en ellos, y cada sitio se rige por sus propias políticas.
+    </p>
+  </div>
+
+  <!-- 5. Cómo controlar las cookies -->
+  <div class="card">
+    <h2>⚙️ 5. Cómo controlar las cookies en tu navegador</h2>
+    <p>
+      Aquí no hay nada que revocar, pero conviene que sepas que puedes gestionar, bloquear o
+      eliminar las cookies de cualquier sitio desde la configuración de tu navegador:
+    </p>
+    <ul>
+      <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
+      <li><a href="https://support.mozilla.org/es/kb/Borrar%20cookies" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a></li>
+      <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Safari</a></li>
+      <li><a href="https://support.microsoft.com/es-es/microsoft-edge" target="_blank" rel="noopener noreferrer">Microsoft Edge</a></li>
+    </ul>
+    <p style="margin-top:.75rem">
+      Ten en cuenta que bloquear cookies de forma general puede impedir el funcionamiento
+      normal de otros sitios que sí dependen de ellas. Este no se verá afectado.
+    </p>
+  </div>
+
+  <!-- 6. Decisiones automatizadas -->
+  <div class="card">
+    <h2>🤖 6. Elaboración de perfiles y decisiones automatizadas</h2>
+    <p>
+      No se elaboran perfiles de usuario ni se adoptan decisiones automatizadas con efectos
+      jurídicos o de similar relevancia, en el sentido del <strong>artículo 22 del RGPD</strong>.
+      Tampoco se realiza medición de audiencia de ningún tipo.
+    </p>
+  </div>
+
+  <!-- 7. Normativa -->
+  <div class="card">
+    <h2>⚖️ 7. Normativa aplicable</h2>
+    <ul>
+      <li><strong>Ley 34/2002 (LSSI-CE)</strong>, artículo 22.2 — Consentimiento para el uso de dispositivos de almacenamiento y recuperación de datos.</li>
+      <li><strong>Directiva 2002/58/CE</strong> (ePrivacy), artículo 5.3, modificada por la Directiva 2009/136/CE.</li>
+      <li><strong>Reglamento (UE) 2016/679 (RGPD)</strong> — Requisitos del consentimiento y derechos del interesado.</li>
+      <li><strong>Ley Orgánica 3/2018 (LOPDGDD)</strong> — Protección de datos y garantía de los derechos digitales.</li>
+      <li><strong>Guía sobre el uso de las cookies</strong> de la Agencia Española de Protección de Datos, edición de mayo de 2024.</li>
+    </ul>
+    <p style="margin-top:.75rem">
+      Si tienes dudas sobre esta política, puedes escribir a
+      <a href="mailto:marcos.dev.martinez@gmail.com">marcos.dev.martinez@gmail.com</a>.
+      También puedes presentar una reclamación ante la
+      <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">Agencia Española de Protección de Datos (AEPD)</a>.
+    </p>
+  </div>
+
+  <div class="update-box">
+    <strong>Política de Cookies</strong> · Versión 1.0 · Agosto 2026<br>
+    Esta política se revisará cada vez que cambien las tecnologías empleadas en el sitio.
+    La fecha de última actualización se indica en la cabecera.
+  </div>
+
+</main>
+
+<footer>
+  <p>© <span id="year">2026</span> Marcos Martínez ·
+    <a href="index.html">Portfolio</a> ·
+    <a href="aviso-legal.html">Aviso Legal</a> ·
+    <a href="politica-privacidad.html">Política de Privacidad</a> ·
+    <a href="politica-cookies.html">Política de Cookies</a>
+  </p>
+</footer>
+
+<script>
+  // Mantiene el año del copyright al día. El 2026 del HTML es el respaldo
+  // por si el JavaScript no se ejecuta.
+  (function () {
+    try {
+      var y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    } catch (e) {}
+  })();
+</script>
+
+</body>
+</html>
