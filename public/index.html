@@ -404,30 +404,53 @@
 
     /* ── Habilidades ────────────────────────────────────────────── */
     #habilidades { background: var(--bg-card); }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 1rem;
+    .tech-group + .tech-group { margin-top: 2.75rem; }
+    .tech-group-title {
+      display: flex; align-items: center; gap: 1rem;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 0 0 1.1rem;
     }
-    .skill-badge {
+    /* La línea fina ocupa lo que sobra a la derecha del rótulo. */
+    .tech-group-title::after {
+      content: ""; flex: 1 1 auto; height: 1px;
+      background: var(--border);
+    }
+    .tech-list {
+      list-style: none;
+      display: grid;
+      /* auto-fit rellena la fila entera aunque el grupo tenga 3 elementos;
+         min(240px, 100%) evita que la tarjeta sea más ancha que una
+         pantalla de 320 px y provoque desplazamiento horizontal. */
+      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: 0.85rem;
+    }
+    .tech-item {
+      display: flex; align-items: flex-start; gap: 0.9rem;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.1rem;
-      text-align: center;
-      transition: border-color .2s, transform .15s;
-      cursor: default;
+      padding: 1rem 1.1rem;
+      transition: border-color .2s;
     }
-    .skill-badge:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .skill-badge .skill-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
-    .skill-badge .skill-name {
-      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--text-muted);
+    .tech-item:hover { border-color: var(--accent); }
+    .tech-icon {
+      flex: 0 0 auto; display: flex;
+      color: var(--accent2); margin-top: 2px;
     }
-    .skill-badge .skill-level {
-      font-size: 0.7rem; color: var(--accent);
-      margin-top: 0.25rem;
+    .tech-icon svg { width: 22px; height: 22px; display: block; }
+    .tech-body { min-width: 0; }
+    .tech-name {
+      display: block;
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--text); line-height: 1.3;
+    }
+    .tech-note {
+      display: block;
+      font-size: 0.78rem; color: var(--text-muted);
+      line-height: 1.45; margin-top: 0.2rem;
     }
 
     /* ── Proyectos ──────────────────────────────────────────────── */
@@ -624,21 +647,43 @@
     }
     .contact-info p {
       font-size: 0.9rem; color: var(--text-muted);
-      line-height: 1.7; margin-bottom: 2rem;
+      line-height: 1.7; margin-bottom: 1rem;
     }
-    .contact-item {
+    /* Valencia no se puede pulsar, así que no debe parecer una tarjeta
+       pulsable: va como una línea de texto debajo del párrafo. */
+    .contact-lugar {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    .contact-lugar svg { width: 15px; height: 15px; flex: 0 0 auto; }
+    .contact-redes {
+      display: grid; gap: 0.75rem; margin-top: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+    }
+    /* El enlace es la tarjeta entera, no sólo el texto: área pulsable
+       holgada en móvil y un solo tabulador por cuenta. */
+    a.contact-item {
       display: flex; align-items: center; gap: 0.85rem;
       padding: 0.9rem 1rem;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 10px;
-      margin-bottom: 0.75rem;
-      font-size: 0.875rem;
-      transition: border-color .2s;
+      transition: border-color .2s, background-color .2s;
     }
-    .contact-item:hover { border-color: var(--accent); }
-    .contact-item .ci-icon { font-size: 1.2rem; color: var(--text-muted); display: flex; }
-    .contact-item a { color: var(--text-muted); }
+    a.contact-item:hover { border-color: var(--accent); background: var(--bg-card2); }
+    a.contact-item:hover .ci-valor,
+    a.contact-item:hover .ci-icon { color: var(--accent2); }
+    .ci-icon { flex: 0 0 auto; display: flex; color: var(--text-muted); transition: color .2s; }
+    .ci-texto { min-width: 0; }
+    .ci-label {
+      display: block; font-size: 0.72rem;
+      color: var(--text-muted); margin-bottom: 2px;
+    }
+    .ci-valor {
+      display: block; font-size: 0.875rem;
+      color: var(--text); transition: color .2s;
+    }
     .contact-form { display: flex; flex-direction: column; gap: 1rem; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -722,7 +767,7 @@
        sin espacios (un email, una palabra técnica) puede ensanchar la
        columna y provocar scroll horizontal en móviles muy estrechos. */
     .about-grid > *, .contact-grid > *, .projects-grid > * { min-width: 0; }
-    .contact-item a, .footer-legal a, .project-desc { overflow-wrap: anywhere; }
+    .ci-valor, .footer-legal a, .project-desc { overflow-wrap: anywhere; }
 
     /* ── Responsive ─────────────────────────────────────────────── */
     /* ── Hamburger button ───────────────────────────────────────── */
@@ -896,82 +941,99 @@
   <section id="habilidades" aria-labelledby="skills-title">
     <p class="section-label">02 — Habilidades</p>
     <h2 class="section-title" id="skills-title">Tecnologías</h2>
-    <p class="section-sub">Las herramientas y lenguajes con los que construyo mis proyectos.</p>
+    <p class="section-sub">Todo lo que construyo está escrito a mano, sin frameworks ni plantillas.</p>
 
-    <div class="skills-grid fade-in" role="list" aria-label="Lista de habilidades">
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">🌐</div>
-        <div class="skill-name">HTML5</div>
-        <div class="skill-level">Semántico</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">🎨</div>
-        <div class="skill-name">CSS3</div>
-        <div class="skill-level">Flexbox · Grid</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">⚡</div>
-        <div class="skill-name">JavaScript</div>
-        <div class="skill-level">ES6+</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">📱</div>
-        <div class="skill-name">Responsive</div>
-        <div class="skill-level">Mobile First</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">♿</div>
-        <div class="skill-name">WCAG 2.1</div>
-        <div class="skill-level">Accesibilidad</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">🔍</div>
-        <div class="skill-name">SEO</div>
-        <div class="skill-level">On-page</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">🔥</div>
-        <div class="skill-name">Firebase</div>
-        <div class="skill-level">Hosting</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">🐙</div>
-        <div class="skill-name">Git</div>
-        <div class="skill-level">Control versiones</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">⚖️</div>
-        <div class="skill-name">RGPD</div>
-        <div class="skill-level">Normativa UE</div>
-      </div>
+    <!-- Los iconos son SVG escritos aquí mismo: se ven igual en cualquier
+         sistema (el dibujo de un emoji lo decide el móvil o el ordenador de
+         quien mira) y no añaden ninguna petición al servidor. Van con
+         aria-hidden porque el nombre ya está escrito al lado. -->
+
+    <div class="tech-group fade-in">
+      <h3 class="tech-group-title">Lenguajes</h3>
+      <ul class="tech-list" role="list">
+        <li class="tech-item">
+          <span class="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-5 6 5 6"/><path d="m16 6 5 6-5 6"/><path d="M13.5 4 10.5 20"/></svg></span>
+          <span class="tech-body">
+            <span class="tech-name">HTML5</span>
+            <span class="tech-note">Estructura semántica, formularios y metadatos</span>
+          </span>
+        </li>
+        <li class="tech-item">
+          <span class="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.25h16"/><path d="M4 14.75h16"/><path d="M10 3.5 8 20.5"/><path d="M16 3.5l-2 17"/></svg></span>
+          <span class="tech-body">
+            <span class="tech-name">CSS3</span>
+            <span class="tech-note">Grid, Flexbox, variables y animaciones</span>
+          </span>
+        </li>
+        <li class="tech-item">
+          <span class="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg></span>
+          <span class="tech-body">
+            <span class="tech-name">JavaScript</span>
+            <span class="tech-note">ES6+ sin librerías: interacción y lógica</span>
+          </span>
+        </li>
+      </ul>
     </div>
 
-    <p class="section-sub" style="margin-top:3rem; margin-bottom:1.5rem;">
-      Como apoyo en mi flujo de trabajo, utilizo herramientas de inteligencia artificial
-      para investigar, depurar código y acelerar tareas repetitivas.
-    </p>
+    <div class="tech-group fade-in">
+      <h3 class="tech-group-title">Cómo trabajo</h3>
+      <ul class="tech-list" role="list">
+        <li class="tech-item">
+          <span class="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="7" r="1.15" fill="currentColor" stroke="none"/><path d="M6.9 10.4h10.2"/><path d="M12 10.4v4"/><path d="m12 14.4-2.2 4.1"/><path d="m12 14.4 2.2 4.1"/></svg></span>
+          <span class="tech-body">
+            <span class="tech-name">Accesibilidad</span>
+            <span class="tech-note">WCAG 2.1 AA: contraste, foco visible, teclado</span>
+          </span>
+        </li>
+        <li class="tech-item">
+          <span class="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="13" height="9.5" rx="2"/><path d="M9 14v4.5"/><path d="M6.25 18.5h5.5"/><rect x="17" y="10" width="4.5" height="9.5" rx="1.5"/></svg></span>
+          <span class="tech-body">
+            <span class="tech-name">Diseño responsive</span>
+            <span class="tech-note">Mobile first, comprobado desde 320 px</span>
+          </span>
+        </li>
+        <li class="tech-item">
+          <span class="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.34 19a10 10 0 1 1 17.32 0"/><path d="m12 14 4-4.5"/></svg></span>
+          <span class="tech-body">
+            <span class="tech-name">Rendimiento</span>
+            <span class="tech-note">Imágenes optimizadas y cero peticiones externas</span>
+          </span>
+        </li>
+        <li class="tech-item">
+          <span class="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.25"/><path d="m20.5 20.5-4.2-4.2"/></svg></span>
+          <span class="tech-body">
+            <span class="tech-name">SEO on-page</span>
+            <span class="tech-note">Metadatos, Open Graph y enlaces limpios</span>
+          </span>
+        </li>
+      </ul>
+    </div>
 
-    <div class="skills-grid fade-in" role="list" aria-label="Herramientas de inteligencia artificial">
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">🧠</div>
-        <div class="skill-name">Claude</div>
-        <div class="skill-level">Programación</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">🤖</div>
-        <div class="skill-name">ChatGPT</div>
-        <div class="skill-level">Creación de imágenes</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">✨</div>
-        <div class="skill-name">Gemini</div>
-        <div class="skill-level">Prompts</div>
-      </div>
-      <div class="skill-badge" role="listitem">
-        <div class="skill-icon" aria-hidden="true">🔎</div>
-        <div class="skill-name">Perplexity</div>
-        <div class="skill-level">Legal y accesibilidad</div>
-      </div>
+    <div class="tech-group fade-in">
+      <h3 class="tech-group-title">Herramientas y normativa</h3>
+      <ul class="tech-list" role="list">
+        <li class="tech-item">
+          <span class="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6" r="2.5"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="8.5" r="2.5"/><path d="M6.5 8.5v7"/><path d="M17.5 11a6 6 0 0 1-6 6H9"/></svg></span>
+          <span class="tech-body">
+            <span class="tech-name">Git y GitHub</span>
+            <span class="tech-note">Control de versiones, cinco repositorios públicos</span>
+          </span>
+        </li>
+        <li class="tech-item">
+          <span class="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"/><path d="m8 17 4-4 4 4"/><path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.5 8.24"/></svg></span>
+          <span class="tech-body">
+            <span class="tech-name">Firebase</span>
+            <span class="tech-note">Despliegue, hosting y reglas de base de datos</span>
+          </span>
+        </li>
+        <li class="tech-item">
+          <span class="tech-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s7.75-3.75 7.75-9.75V5.4L12 2.3 4.25 5.4V11.75c0 6 7.75 9.75 7.75 9.75Z"/><path d="m9.25 11.75 1.9 1.9 3.6-3.6"/></svg></span>
+          <span class="tech-body">
+            <span class="tech-name">RGPD y LSSI</span>
+            <span class="tech-note">Avisos legales, cookies y consentimiento propios</span>
+          </span>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -1298,76 +1360,72 @@
           No dudes en escribirme, te respondo en menos de 24 horas.
         </p>
 
-        <div class="contact-item">
-          <span class="ci-icon" aria-hidden="true">✉️</span>
-          <div>
-            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;">Email</div>
-            <a href="mailto:marcos.dev.martinez@gmail.com">marcos.dev.martinez@gmail.com</a>
-          </div>
-        </div>
+        <p class="contact-lugar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 5.5-8 12-8 12s-8-6.5-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></svg>
+          Valencia, España
+        </p>
 
-        <div class="contact-item">
+        <a class="contact-item" href="mailto:marcos.dev.martinez@gmail.com">
           <span class="ci-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:block">
-              <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:block">
+              <rect x="2.5" y="5" width="19" height="14" rx="2.5"/>
+              <path d="m3.6 7.2 8.4 5.9 8.4-5.9"/>
             </svg>
           </span>
-          <div>
-            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;">LinkedIn</div>
-            <a href="https://www.linkedin.com/in/marcos-dev-martinez" target="_blank" rel="noopener noreferrer">marcos-dev-martinez</a>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <span class="ci-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="display:block">
-              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
-            </svg>
+          <span class="ci-texto">
+            <span class="ci-label">Email</span>
+            <span class="ci-valor">marcos.dev.martinez@gmail.com</span>
           </span>
-          <div>
-            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;">GitHub</div>
-            <a href="https://github.com/Marcos-Dev-Martinez" target="_blank" rel="noopener noreferrer">Marcos-Dev-Martinez</a>
-          </div>
-        </div>
+        </a>
 
-        <div class="contact-item">
-          <span class="ci-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:block">
-              <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
-            </svg>
-          </span>
-          <div>
-            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;">Instagram</div>
-            <a href="https://www.instagram.com/marcosdevmartinez/" target="_blank" rel="noopener noreferrer">@marcosdevmartinez</a>
-          </div>
-        </div>
+        <div class="contact-redes">
+          <a class="contact-item" href="https://www.linkedin.com/in/marcos-dev-martinez" target="_blank" rel="noopener noreferrer">
+            <span class="ci-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:block">
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+              </svg>
+            </span>
+            <span class="ci-texto">
+              <span class="ci-label">LinkedIn</span>
+              <span class="ci-valor">marcos-dev-martinez</span>
+            </span>
+          </a>
 
-        <div class="contact-item">
-          <span class="ci-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:block">
-              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-            </svg>
-          </span>
-          <div>
-            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;">TikTok</div>
-            <a href="https://www.tiktok.com/@marcosdevmartinez" target="_blank" rel="noopener noreferrer">@marcosdevmartinez</a>
-          </div>
-        </div>
+          <a class="contact-item" href="https://github.com/Marcos-Dev-Martinez" target="_blank" rel="noopener noreferrer">
+            <span class="ci-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="display:block">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+              </svg>
+            </span>
+            <span class="ci-texto">
+              <span class="ci-label">GitHub</span>
+              <span class="ci-valor">Marcos-Dev-Martinez</span>
+            </span>
+          </a>
 
-        <div class="contact-item">
-          <span class="ci-icon" aria-hidden="true">📍</span>
-          <div>
-            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;">Ubicación</div>
-            <span style="color:var(--text-muted);">Valencia, España</span>
-          </div>
-        </div>
+          <a class="contact-item" href="https://www.instagram.com/marcosdevmartinez/" target="_blank" rel="noopener noreferrer">
+            <span class="ci-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:block">
+                <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+              </svg>
+            </span>
+            <span class="ci-texto">
+              <span class="ci-label">Instagram</span>
+              <span class="ci-valor">@marcosdevmartinez</span>
+            </span>
+          </a>
 
-        <div class="contact-item">
-          <span class="ci-icon" aria-hidden="true">🕐</span>
-          <div>
-            <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;">Disponibilidad</div>
-            <span style="color:var(--text-muted);">Abierto a colaboraciones</span>
-          </div>
+          <a class="contact-item" href="https://www.tiktok.com/@marcosdevmartinez" target="_blank" rel="noopener noreferrer">
+            <span class="ci-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:block">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+              </svg>
+            </span>
+            <span class="ci-texto">
+              <span class="ci-label">TikTok</span>
+              <span class="ci-valor">@marcosdevmartinez</span>
+            </span>
+          </a>
         </div>
       </div>
 
