@@ -11,7 +11,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="theme-color" content="#0A0F1E">
+  <meta name="theme-color" content="#14161C">
 
   <!-- ═══════════════════════════════════════════════════════════════════
        VISTA PREVIA AL COMPARTIR (Open Graph y Twitter Cards)
@@ -56,7 +56,7 @@
     "name": "Marcos Martínez",
     "jobTitle": "Desarrollador Web",
     "url": "https://marcosmartinez-portfolio.web.app/",
-    "image": "https://marcosmartinez-portfolio.web.app/og-image.jpg",
+    "image": "https://marcosmartinez-portfolio.web.app/marcos.webp",
     "email": "mailto:marcos.dev.martinez@gmail.com",
     "address": {
       "@type": "PostalAddress",
@@ -124,20 +124,20 @@
     /* ── Reset & base ───────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:        #0A0F1E;
-      --bg-card:   #111827;
-      --bg-card2:  #161f35;
-      --blue:      #1E40AF;
-      --accent:    #3B82F6;
-      --accent2:   #60A5FA;
-      --text:      #F1F5F9;
-      --text-muted:#94A3B8;
-      --border:    #1E293B;
+      --bg:        #14161C;
+      --bg-card:   #1D1F25;
+      --bg-card2:  #24272D;
+      --blue:      #2E5CD3;
+      --accent:    #618EF1;
+      --accent2:   #87AFFF;
+      --text:      #F4F1EC;
+      --text-muted:#8A929E;
+      --border:    #2D3036;
       /* Borde con contraste suficiente (3:1) para los campos de formulario.
          WCAG 2.1 AA — 1.4.11 Contraste de elementos no textuales. */
-      --border-input: #64748B;
-      --green:     #10B981;
-      --error:     #F87171;
+      --border-input: #6D6F77;
+      --green:     #1DBE85;
+      --error:     #FD7675;
       --radius:    12px;
     }
     html { scroll-behavior: smooth; scroll-padding-top: 80px; }
@@ -175,7 +175,7 @@
       transform: translate(-50%, -120%);
       z-index: 200;
       background: var(--accent);
-      color: #0A0F1E;
+      color: #14161C;
       font-weight: 700; font-size: 0.9rem;
       padding: 0.75rem 1.5rem;
       border-radius: 0 0 8px 8px;
@@ -207,7 +207,7 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 5%;
       height: 64px;
-      background: rgba(10, 15, 30, 0.85);
+      background: rgba(20, 22, 28, 0.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -230,7 +230,9 @@
       font-weight: 600 !important;
       transition: background .2s !important;
     }
-    .nav-cta:hover { background: var(--accent) !important; color: var(--text) !important; }
+    /* En hover el fondo se aclara, así que el texto pasa a tinta oscura.
+       Con texto claro daba 3,36:1, por debajo del mínimo de 4,5:1. */
+    .nav-cta:hover { background: var(--accent) !important; color: var(--bg) !important; }
 
     /* ── Hero ───────────────────────────────────────────────────── */
     #inicio {
@@ -243,7 +245,7 @@
     }
     .hero-dots {
       position: absolute; inset: 0;
-      background-image: radial-gradient(circle, #1E293B 1px, transparent 1px);
+      background-image: radial-gradient(circle, #2D3036 1px, transparent 1px);
       background-size: 32px 32px;
       opacity: 0.5;
       pointer-events: none;
@@ -251,7 +253,7 @@
     .hero-glow {
       position: absolute; top: 20%; right: 5%;
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(97,142,241,0.15) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero-eyebrow {
@@ -305,7 +307,7 @@
       transition: background .2s, transform .15s;
       display: inline-flex; align-items: center; gap: 0.5rem;
     }
-    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-primary:hover { background: var(--accent); color: var(--bg); transform: translateY(-2px); }
     .btn-outline {
       border: 1px solid var(--border);
       color: var(--text-muted);
@@ -363,11 +365,37 @@
       margin-bottom: 1rem; font-size: 0.95rem;
     }
     .about-text p strong { color: var(--text); }
-    .about-stats {
+    /* La foto va arriba de la columna derecha, encima de las cifras, y mide
+       exactamente una columna de la rejilla para que su borde derecho
+       coincida con el de la tarjeta de abajo. Cuadrada y con el mismo radio
+       que las tarjetas: un círculo tiraría más a red social que a portfolio. */
+    .about-lateral {
       display: grid;
-      /* auto-fit + min() en vez de 1fr 1fr fijo: en pantallas muy estrechas
-         las tarjetas pasan a una sola columna en lugar de desbordar. */
-      grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem; align-items: start;
+    }
+    .about-foto {
+      grid-column: 1;
+      margin: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg-card);
+      line-height: 0;
+    }
+    .about-foto img {
+      width: 100%; height: auto;
+      display: block; aspect-ratio: 1;
+      object-fit: cover;
+    }
+    .about-stats {
+      grid-column: 1 / -1;
+      display: grid;
+      /* Dos columnas fijas: con auto-fit salían tres y la cuarta tarjeta se
+         quedaba huérfana en una fila para ella sola. minmax(0, 1fr) deja que
+         las pistas se encojan por debajo de su contenido, que es lo que evita
+         el desbordamiento en pantallas muy estrechas. */
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
     }
     .about-stats > * { min-width: 0; }
@@ -474,7 +502,7 @@
     .project-card:hover {
       border-color: var(--accent);
       transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(59,130,246,0.1);
+      box-shadow: 0 20px 40px rgba(97,142,241,0.1);
     }
     .project-img {
       width: 100%; height: 200px; object-fit: cover;
@@ -492,9 +520,9 @@
     .tag {
       font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
       font-size: 0.65rem; font-weight: 500;
-      background: rgba(59,130,246,0.1);
+      background: rgba(97,142,241,0.1);
       color: var(--accent2);
-      border: 1px solid rgba(59,130,246,0.2);
+      border: 1px solid rgba(97,142,241,0.2);
       padding: 0.2rem 0.6rem;
       border-radius: 4px;
     }
@@ -525,6 +553,69 @@
       transition: color .2s;
     }
     .project-code:hover { color: var(--text); }
+
+    /* ── Certificaciones ────────────────────────────────────────── */
+    #certificaciones { background: var(--bg-card); }
+    .certs-grid {
+      list-style: none;
+      display: grid;
+      /* auto-fill, NO auto-fit: con un solo certificado auto-fit lo estiraría
+         a todo el ancho de la página y un curso de iniciación ocupando 1200 px
+         diría lo que no es. Con auto-fill ocupa una pista y deja las otras
+         vacías; cuando lleguen el segundo y el tercero se colocan solos. */
+      grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
+      gap: 1rem;
+    }
+    .certs-grid > li { min-width: 0; }
+    /* El enlace es la tarjeta entera y lleva a la pagina de verificacion
+       oficial. Un certificado que no se puede comprobar no vale nada. */
+    a.cert-card {
+      display: flex; align-items: flex-start; gap: 0.9rem;
+      height: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.15rem 1.25rem;
+      transition: border-color .2s, background-color .2s;
+    }
+    a.cert-card:hover { border-color: var(--accent); background: var(--bg-card2); }
+    a.cert-card:hover .cert-icon,
+    a.cert-card:hover .cert-verificar { color: var(--accent2); }
+    .cert-icon {
+      flex: 0 0 auto; display: flex; margin-top: 2px;
+      color: var(--accent2); transition: color .2s;
+    }
+    .cert-icon svg { width: 24px; height: 24px; display: block; }
+    .cert-cuerpo { min-width: 0; flex: 1 1 auto; }
+    .cert-nombre {
+      display: block; font-size: 1rem; font-weight: 600;
+      color: var(--text); line-height: 1.3;
+    }
+    .cert-emisor {
+      display: block; font-size: 0.82rem;
+      color: var(--text-muted); margin-top: 0.15rem;
+    }
+    /* La fecha y el «Verificar» comparten un pie. Antes «Verificar» iba en
+       una columna a la derecha y chocaba con el nombre del emisor cuando
+       éste envolvía a dos líneas. */
+    .cert-pie {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 0.75rem; flex-wrap: wrap;
+      margin-top: 0.7rem; padding-top: 0.7rem;
+      border-top: 1px solid var(--border);
+    }
+    .cert-meta {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.7rem; color: var(--text-muted);
+    }
+    .cert-verificar {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.08em;
+      text-transform: uppercase; white-space: nowrap;
+      color: var(--accent); transition: color .2s;
+    }
+    .cert-verificar svg { width: 11px; height: 11px; }
 
     /* ── Experiencia / Formación ────────────────────────────────── */
     #experiencia { background: var(--bg-card); }
@@ -570,26 +661,31 @@
     /* ── Divulgación · Trastea IA ───────────────────────────────────
        Los cuatro colores vienen del sistema de la serie, pero AQUÍ NO
        SIRVEN TAL CUAL: los suyos están pensados para fondo claro y esta
-       web es oscura. Sobre #111827, el verde original (#007145) daba
+       web es oscura. Sobre #1D1F25, el verde original (#007145) daría
        1,6:1 — invisible.
 
-       Así que se ha aplicado su propia receta al revés: se conserva el
-       TONO de cada pilar y se sube la luminosidad hasta igualar todos
-       en contraste. Los cuatro dan 6,0:1 sobre la tarjeta y 6,5:1 sobre
-       el fondo, igual que los suyos dan 5,43:1 sobre papel claro.
+       El óxido NO está calculado: es literalmente el de sus slides
+       nuevas, sacado de la imagen píxel a píxel. Los otros tres salen
+       de aplicarle a ese la misma receta que usa él — conservar el TONO
+       y mover sólo la luminosidad hasta igualar a los cuatro en
+       contraste. Los cuatro dan 5,7:1 sobre el fondo y 5,2:1 sobre la
+       tarjeta, igual que los suyos dan 5,43:1 sobre papel claro.
 
-              suyo (claro)      aquí (oscuro)     tono
-       azul     #1E52E8    →      #7293F2         224°
-       verde    #007145    →      #00AD69         157°
-       óxido    #B23600    →      #FF6624          18°
-       violeta  #A500C8    →      #E25BFF         289°
+              serie (claro)     aquí (oscuro)     tono
+       azul     #1E52E8    →      #618EF1         221°
+       verde    #007145    →      #00A665         157°
+       óxido    #B23600    →      #E2703F          18°  ← de las slides
+       violeta  #A500C8    →      #BE74D4         286°
+
+       El azul del pilar y el acento de la web son el mismo color a
+       propósito: el azul es la casa.
 
        Si algún día añade un pilar nuevo, la regla es la suya: que el
        tono esté a más de 40° de los otros cuatro. */
-    .pilar-azul    { --pilar: #7293F2; }
-    .pilar-verde   { --pilar: #00AD69; }
-    .pilar-oxido   { --pilar: #FF6624; }
-    .pilar-violeta { --pilar: #E25BFF; }
+    .pilar-azul    { --pilar: #618EF1; }
+    .pilar-verde   { --pilar: #00A665; }
+    .pilar-oxido   { --pilar: #E2703F; }
+    .pilar-violeta { --pilar: #BE74D4; }
 
     .pilares-grid {
       display: grid;
@@ -704,7 +800,7 @@
     }
     input:focus, textarea:focus, select:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.25);
+      box-shadow: 0 0 0 3px rgba(97,142,241,0.25);
     }
     [aria-invalid="true"] { border-color: var(--error) !important; }
     .field-error {
@@ -736,7 +832,7 @@
       transition: background .2s, transform .15s;
       align-self: flex-start;
     }
-    .btn-submit:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-submit:hover { background: var(--accent); color: var(--bg); transform: translateY(-2px); }
 
     /* ── Footer ─────────────────────────────────────────────────── */
     footer {
@@ -785,13 +881,16 @@
     .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
     .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    @media (max-width: 768px) {
-      .site-nav { padding: 0 4%; }
+    /* El menú se pliega ANTES que el resto del responsive. Desde que existe
+       Certificaciones son seis enlaces, y a 800 px el menú se quedaba a 7 px
+       del logotipo: cualquier fuente de reserva mientras carga la propia, o
+       un tamaño de letra mayor del navegador, los hacía chocar. */
+    @media (max-width: 900px) {
       .nav-hamburger { display: flex; }
       .nav-links {
         display: none; flex-direction: column; gap: 0;
         position: fixed; top: 64px; left: 0; right: 0;
-        background: rgba(10,15,30,0.97);
+        background: rgba(20,22,28,0.97);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--border);
         padding: 1rem 0;
@@ -802,6 +901,10 @@
         font-size: 1rem;
       }
       .nav-cta { margin: 0.5rem 5%; border-radius: 8px; text-align: center; }
+    }
+
+    @media (max-width: 768px) {
+      .site-nav { padding: 0 4%; }
       section { padding: 72px 5%; }
       #inicio { padding: 0 5%; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -839,6 +942,7 @@
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#habilidades">Habilidades</a>
       <a href="#proyectos">Proyectos</a>
+      <a href="#certificaciones">Certificaciones</a>
       <a href="#divulgacion">Divulgación</a>
       <a href="#contacto" class="nav-cta">Contacto</a>
     </div>
@@ -914,22 +1018,29 @@
         </div>
       </div>
 
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">5</div>
-          <div class="stat-label">Proyectos publicados</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Publicaciones semanales sobre IA</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">AA</div>
-          <div class="stat-label">Nivel WCAG 2.1 en mis proyectos</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">FCC</div>
-          <div class="stat-label">Certificación FreeCodeCamp</div>
+      <div class="about-lateral">
+        <figure class="about-foto">
+          <img src="marcos.webp" alt="Marcos Martínez"
+               width="560" height="560" loading="lazy" decoding="async">
+        </figure>
+
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-num">5</div>
+            <div class="stat-label">Proyectos publicados</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Publicaciones semanales sobre IA</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">AA</div>
+            <div class="stat-label">Nivel WCAG 2.1 en mis proyectos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">FCC</div>
+            <div class="stat-label">Certificación FreeCodeCamp</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1209,6 +1320,56 @@
     </div>
   </section>
 
+  <div class="divider" role="separator"></div>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       CERTIFICACIONES
+
+       Para añadir uno nuevo: copia un <li> entero y cambia cinco cosas —
+       el href de verificación, el nombre, el emisor, el datetime y la
+       fecha escrita. Nada más. Si añadir costara más, dejarías de hacerlo.
+
+       La rejilla es auto-FILL a propósito (ver el CSS): con auto-fit una
+       sola tarjeta se estiraría a todo el ancho.
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="certificaciones" aria-labelledby="certs-title">
+    <p class="section-label">04 — Certificaciones</p>
+    <h2 class="section-title" id="certs-title">Formación verificable</h2>
+    <p class="section-sub">
+      Cada certificado enlaza a su página oficial de comprobación. Un clic y
+      se ve que es real.
+    </p>
+
+    <ul class="certs-grid fade-in" role="list">
+      <li>
+        <a class="cert-card"
+           href="https://academy.claude.com/verify/25276ab26c67fd98bab7237b8a271b9e"
+           target="_blank" rel="noopener noreferrer">
+          <span class="cert-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="9" r="6.25"/>
+              <path d="m8.4 14.4-1.4 7.1 5-2.6 5 2.6-1.4-7.1"/>
+            </svg>
+          </span>
+          <span class="cert-cuerpo">
+            <span class="cert-nombre">Claude 101</span>
+            <span class="cert-emisor">Claude Academy · insignia de finalización de curso</span>
+            <span class="cert-pie">
+              <span class="cert-meta">
+                <time datetime="2026-09-25">25 de septiembre de 2026</time> · sin caducidad
+              </span>
+              <span class="cert-verificar">
+                Verificar
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+              </span>
+            </span>
+          </span>
+          <span class="sr-only">(se abre en una pestaña nueva)</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
   <!-- ══════════════════════════════════════════════════════════════
        SECCIÓN "MI TRAYECTORIA" — RETIRADA TEMPORALMENTE (23/08/2026)
 
@@ -1217,7 +1378,13 @@
             cierra al final del bloque.
          2. Vuelve a poner el enlace "Formación" (apuntando a #experiencia)
             en el menú de la cabecera y en el del pie.
-         3. Renumera Contacto: de "04 — Contacto" a "05 — Contacto".
+         3. Renumera las secciones de abajo: Certificaciones pasaría a 05,
+            Divulgación a 06 y Contacto a 07.
+
+       OJO: desde el 25/09/2026 existe la sección "Certificaciones", que
+       cubre parte de lo que hacía ésta ("Estudios y certificaciones que
+       respaldan mi perfil técnico"). Si se repone, hay que decidir qué se
+       queda en cada una o se dirán lo mismo dos veces.
        ══════════════════════════════════════════════════════════════ -->
   <!--
   <div class="divider" role="separator"></div>
@@ -1281,7 +1448,7 @@
        y exportar una imagen, dejarías de actualizarlo en tres semanas.
        ════════════════════════════════════════════════════════════════ -->
   <section id="divulgacion" aria-labelledby="content-title">
-    <p class="section-label">04 — Divulgación</p>
+    <p class="section-label">05 — Divulgación</p>
     <h2 class="section-title" id="content-title">Trastea IA</h2>
     <p class="section-sub">
       Pruebo herramientas de inteligencia artificial y cuento lo que funciona
@@ -1291,7 +1458,7 @@
 
     <div class="serie-datos">
       <span class="serie-dato">Martes, jueves y sábado</span>
-      <span class="serie-dato">Carruseles</span>
+      <span class="serie-dato">Carruseles y vídeo</span>
       <span class="serie-dato">Instagram y TikTok</span>
       <span class="serie-dato">Español</span>
     </div>
@@ -1349,7 +1516,7 @@
 
   <!-- CONTACTO -->
   <section id="contacto" aria-labelledby="contact-title">
-    <p class="section-label">05 — Contacto</p>
+    <p class="section-label">06 — Contacto</p>
     <h2 class="section-title" id="contact-title">Hablemos</h2>
 
     <div class="contact-grid fade-in">
@@ -1480,7 +1647,8 @@
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#habilidades">Habilidades</a>
         <a href="#proyectos">Proyectos</a>
-      <a href="divulgacion.html">Divulgación</a>
+        <a href="#certificaciones">Certificaciones</a>
+        <a href="divulgacion.html">Divulgación</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
