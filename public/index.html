@@ -434,7 +434,7 @@
     /* ── Habilidades ────────────────────────────────────────────── */
     #habilidades { background: var(--bg-card); }
     .tech-group + .tech-group { margin-top: 2.75rem; }
-    .tech-group-title {
+    .tech-group-title, .rotulo {
       display: flex; align-items: center; gap: 1rem;
       font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
       font-size: 0.72rem; font-weight: 500;
@@ -443,7 +443,7 @@
       margin: 0 0 1.1rem;
     }
     /* La línea fina ocupa lo que sobra a la derecha del rótulo. */
-    .tech-group-title::after {
+    .tech-group-title::after, .rotulo::after {
       content: ""; flex: 1 1 auto; height: 1px;
       background: var(--border);
     }
@@ -673,67 +673,12 @@
     }
 
 
-    /* ── Divulgación · Trastea IA ───────────────────────────────────
-       Los cuatro colores vienen del sistema de la serie, pero AQUÍ NO
-       SIRVEN TAL CUAL: los suyos están pensados para fondo claro y esta
-       web es oscura. Sobre #1D1F25, el verde original (#007145) daría
-       1,6:1 — invisible.
-
-       El óxido NO está calculado: es literalmente el de sus slides
-       nuevas, sacado de la imagen píxel a píxel. Los otros tres salen
-       de aplicarle a ese la misma receta que usa él — conservar el TONO
-       y mover sólo la luminosidad hasta igualar a los cuatro en
-       contraste. Los cuatro dan 5,7:1 sobre el fondo y 5,2:1 sobre la
-       tarjeta, igual que los suyos dan 5,43:1 sobre papel claro.
-
-              serie (claro)     aquí (oscuro)     tono
-       azul     #1E52E8    →      #618EF1         221°
-       verde    #007145    →      #00A665         157°
-       óxido    #B23600    →      #E2703F          18°  ← de las slides
-       violeta  #A500C8    →      #BE74D4         286°
-
-       El azul del pilar y el acento de la web son el mismo color a
-       propósito: el azul es la casa.
-
-       Si algún día añade un pilar nuevo, la regla es la suya: que el
-       tono esté a más de 40° de los otros cuatro. */
-    .pilar-azul    { --pilar: #618EF1; }
-    .pilar-verde   { --pilar: #00A665; }
-    .pilar-oxido   { --pilar: #E2703F; }
-    .pilar-violeta { --pilar: #BE74D4; }
-
-    .pilares-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-    }
-    .pilares-grid > * { min-width: 0; }
-
-    .pilar-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-top: 3px solid var(--pilar);
-      border-radius: var(--radius);
-      padding: 1.4rem;
-      transition: border-color .2s, transform .15s;
-    }
-    .pilar-card:hover { border-color: var(--pilar); transform: translateY(-3px); }
-    .pilar-nombre {
-      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--pilar);
-      margin-bottom: 0.6rem;
-    }
-    .pilar-desc {
-      font-size: 0.875rem; color: var(--text-muted);
-      line-height: 1.7; margin: 0;
-    }
-
+    /* ── Divulgación · Trastea IA · «Porqués tech» ─────────────────
+       Desde el 07/11/2026 la serie son reels. Todo va con los colores de
+       la web; el azul sigue siendo la casa. */
     .serie-datos {
       display: flex; flex-wrap: wrap; gap: 0.6rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
     .serie-dato {
       font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
@@ -745,6 +690,144 @@
       padding: 0.35rem 0.85rem;
     }
     .serie-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .porques-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 3.5rem; align-items: start;
+      margin-bottom: 2.75rem;
+    }
+    .porques-grid > * { min-width: 0; }
+    .porques-bloque + .porques-bloque { margin-top: 2.5rem; }
+    .porques-lista {
+      list-style: none;
+      display: grid; gap: 0.6rem;
+      margin-bottom: 1.1rem;
+    }
+    .porques-lista li {
+      position: relative; padding-left: 1.2rem;
+      font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;
+    }
+    .porques-lista li::before {
+      content: ""; position: absolute; left: 0; top: 0.62em;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+    }
+    .porques-nota {
+      font-size: 0.9rem; color: var(--text-muted); line-height: 1.75;
+    }
+    .porques-nota strong { color: var(--text); font-weight: 600; }
+
+    /* Los episodios llevan el número que pone la propia lista (01, 02,
+       03): así el lector de pantalla no lo lee dos veces. */
+    .episodios {
+      list-style: decimal-leading-zero;
+      padding-left: 2.4rem;
+      display: grid; gap: 0.7rem;
+    }
+    .episodios li {
+      font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.5;
+      padding-left: 0.3rem;
+    }
+    .episodios li::marker {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.8rem; font-weight: 500; color: var(--accent);
+    }
+    .ep-fecha {
+      display: block;
+      font-size: 0.8rem; font-weight: 400; color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .calendario { display: grid; gap: 0.75rem; }
+    .calendario > div {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 0.95rem 1.1rem;
+    }
+    .calendario dt { font-size: 0.92rem; font-weight: 600; color: var(--text); }
+    .calendario dd { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem; line-height: 1.55; }
+    .calendario .hora {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      color: var(--accent2);
+    }
+
+    /* El reel: marco vertical 9:16, como se ve en el móvil. */
+    .reel { margin: 0; justify-self: center; width: 100%; max-width: 300px; }
+    .reel-marco {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--bg-card);
+      overflow: hidden;
+    }
+    .reel-marco video {
+      display: block; width: 100%; height: 100%;
+      object-fit: cover; background: #000;
+    }
+    .reel-pronto {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center; gap: 0.9rem;
+      padding: 1.75rem;
+      background: radial-gradient(ellipse 90% 60% at 50% 30%, rgba(46, 92, 211, 0.22), transparent 70%);
+    }
+    .reel-icono { width: 44px; height: 44px; color: var(--accent); }
+    .reel-estreno { font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.45; }
+    .reel-mientras { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+    .reel figcaption { margin-top: 0.9rem; }
+    .reel-num {
+      display: block;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .reel-titulo { display: block; font-size: 0.95rem; font-weight: 600; color: var(--text); margin-top: 0.2rem; line-height: 1.4; }
+    .reel-guion { margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-muted); }
+    .reel-guion summary { cursor: pointer; color: var(--accent2); font-weight: 600; }
+    .reel-guion p { margin-top: 0.6rem; line-height: 1.7; }
+
+    /* ── Servicios ──────────────────────────────────────────────── */
+    #servicios { background: var(--bg-card); }
+    .servicio-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 3rem; align-items: start;
+    }
+    .servicio-grid > * { min-width: 0; }
+    .incluye { list-style: none; display: grid; gap: 0.85rem; }
+    .incluye li {
+      display: flex; align-items: flex-start; gap: 0.9rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      font-size: 0.92rem; color: var(--text-muted); line-height: 1.55;
+    }
+    .incluye li strong { color: var(--text); font-weight: 600; }
+    .incluye svg { flex: 0 0 auto; width: 20px; height: 20px; color: var(--green); margin-top: 1px; }
+    .servicio-caja {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.6rem 1.75rem;
+    }
+    .servicio-caja p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
+    .servicio-caja p a { color: var(--accent2); text-decoration: underline; text-underline-offset: 0.18em; }
+    .servicio-caja p a:hover { color: var(--text); }
+    .servicio-caja .servicio-pregunta {
+      font-size: 1.15rem; font-weight: 800; color: var(--text);
+      letter-spacing: -0.3px; margin: 1.5rem 0 0.35rem;
+    }
+    .servicio-caja .btn-primary { margin-top: 0.5rem; }
+
+    @media (max-width: 900px) {
+      .porques-grid, .servicio-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .reel { max-width: 280px; }
+    }
 
     /* ── Contacto ───────────────────────────────────────────────── */
     #contacto { background: var(--bg); }
@@ -923,6 +1006,11 @@
        Certificaciones son seis enlaces, y a 800 px el menú se quedaba a 7 px
        del logotipo: cualquier fuente de reserva mientras carga la propia, o
        un tamaño de letra mayor del navegador, los hacía chocar. */
+    /* Con «Servicios» el menú tiene siete enlaces: justo por encima de
+       900 px se quedaban a 6 px del logo. Se aprietan un poco. */
+    @media (min-width: 901px) and (max-width: 1100px) {
+      .nav-links { gap: 1.25rem; }
+    }
     @media (max-width: 900px) {
       .nav-hamburger { display: flex; }
       .nav-links {
@@ -982,6 +1070,7 @@
       <a href="#proyectos">Proyectos</a>
       <a href="#certificaciones">Certificaciones</a>
       <a href="#divulgacion">Divulgación</a>
+      <a href="#servicios">Servicios</a>
       <a href="#contacto" class="nav-cta">Contacto</a>
     </div>
     <button class="nav-hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu" id="hamburger">
@@ -1069,7 +1158,7 @@
           </div>
           <div class="stat-card">
             <div class="stat-num">3</div>
-            <div class="stat-label">Publicaciones semanales sobre IA</div>
+            <div class="stat-label">Reels a la semana en «Porqués tech»</div>
           </div>
           <div class="stat-card">
             <div class="stat-num">AA</div>
@@ -1485,7 +1574,7 @@
          2. Vuelve a poner el enlace "Formación" (apuntando a #experiencia)
             en el menú de la cabecera y en el del pie.
          3. Renumera las secciones de abajo: Certificaciones pasaría a 05,
-            Divulgación a 06 y Contacto a 07.
+            Divulgación a 06, Servicios a 07 y Contacto a 08.
 
        OJO: desde el 25/09/2026 existe la sección "Certificaciones", que
        cubre parte de lo que hacía ésta ("Estudios y certificaciones que
@@ -1543,82 +1632,196 @@
   -->
 
   <!-- ════════════════════════════════════════════════════════════════
-       DIVULGACIÓN · TRASTEA IA
+       DIVULGACIÓN · TRASTEA IA · «PORQUÉS TECH»
 
-       OJO, ESTA SECCIÓN NO SE TOCA CUANDO PUBLIQUES.
-       Aquí sólo están los cuatro pilares, que no cambian. Las
-       publicaciones van en divulgacion.html, y ése es el único archivo
-       que tienes que editar cada martes, jueves y sábado.
+       Desde el 07/11/2026 Trastea IA es UNA sola serie: «Porqués tech».
+       Si algún día cambia el calendario, está escrito en dos sitios: la
+       lista .calendario de aquí abajo y nada más (la cifra «3» de Sobre mí
+       también, si dejan de ser tres a la semana).
 
-       Lo hice así a propósito: si publicar implicara tocar dos archivos
-       y exportar una imagen, dejarías de actualizarlo en tres semanas.
+       EL HUECO DEL REEL (figure#reel-disquete): hasta que tengas el vídeo
+       se ve el aviso de estreno. Cuando lo tengas:
+         1. Exporta una versión ligera (720 × 1280, unos 5 MB) como
+            public/reels/disquete.mp4 y una portada como
+            public/reels/disquete.jpg (el primer fotograma vale).
+         2. Borra el <div class="reel-pronto"> entero.
+         3. Quita los comentarios que rodean al <video> y al <details>, y
+            pega el guion dentro del <details>.
+       NO lo incrustes desde YouTube, Instagram o TikTok: sus reproductores
+       cargan cosas de Google o de Meta y ponen cookies antes de que nadie
+       acepte nada. Eso rompería el «cero peticiones externas» y obligaría a
+       poner un banner de cookies. Servido desde aquí, no.
        ════════════════════════════════════════════════════════════════ -->
   <section id="divulgacion" aria-labelledby="content-title">
     <p class="section-label">05 — Divulgación</p>
-    <h2 class="section-title" id="content-title">Trastea IA</h2>
+    <h2 class="section-title" id="content-title">Porqués tech</h2>
     <p class="section-sub">
-      Pruebo herramientas de inteligencia artificial y cuento lo que funciona
-      y lo que no. Sin humo y sin darlo por supuesto: lo que enseño lo he
-      probado antes.
+      Mi serie de Trastea IA: reels de menos de un minuto que explican el
+      porqué de cosas de la tecnología que usamos cada día.
     </p>
 
     <div class="serie-datos">
-      <span class="serie-dato">Tres a la semana</span>
-      <span class="serie-dato">Instagram y TikTok</span>
-      <span class="serie-dato">YouTube y LinkedIn</span>
-      <span class="serie-dato">Carrusel, vídeo y PDF</span>
-      <span class="serie-dato">Español</span>
+      <span class="serie-dato">Reels de 45 a 55 s</span>
+      <span class="serie-dato">Instagram, TikTok y YouTube Shorts</span>
+      <span class="serie-dato">También en LinkedIn</span>
+      <span class="serie-dato">En español</span>
     </div>
 
-    <div class="pilares-grid fade-in">
+    <div class="porques-grid fade-in">
+      <div class="porques-texto">
 
-      <article class="pilar-card pilar-azul">
-        <p class="pilar-nombre">Descubrir</p>
-        <p class="pilar-desc">
-          Lo que estas herramientas ya saben hacer y casi nadie está usando.
-        </p>
-      </article>
+        <div class="porques-bloque">
+          <h3 class="rotulo">Cómo son</h3>
+          <ul class="porques-lista">
+            <li>Explicación animada en dibujo plano 2D, con voz en off.</li>
+            <li>Subtítulos palabra a palabra, con las palabras clave resaltadas.</li>
+            <li>Los datos aparecen en pantalla justo cuando la voz los dice.</li>
+            <li>Cierran con una pregunta para que la contestes en comentarios.</li>
+          </ul>
+          <p class="porques-nota">
+            Los hago con IA: el guion, la voz y la animación, que programo con
+            Remotion. Cada dato lo compruebo antes en sus fuentes.
+            <strong>No es contenido sobre IA: la IA es la herramienta con la
+            que los hago.</strong>
+          </p>
+        </div>
 
-      <article class="pilar-card pilar-verde">
-        <p class="pilar-nombre">Prompts</p>
-        <p class="pilar-desc">
-          Cómo pedir las cosas para que salgan bien a la primera, con
-          plantillas que puedes copiar.
-        </p>
-      </article>
+        <div class="porques-bloque">
+          <h3 class="rotulo">Los tres primeros</h3>
+          <ol class="episodios">
+            <li>
+              ¿Por qué el icono de guardar es un disquete?
+              <span class="ep-fecha">Estreno: <time datetime="2026-11-08T18:00">domingo 8 de noviembre</time></span>
+            </li>
+            <li>¿Por qué el teclado está desordenado (QWERTY)?</li>
+            <li>¿Por qué las notificaciones son rojas?</li>
+          </ol>
+        </div>
 
-      <article class="pilar-card pilar-oxido">
-        <p class="pilar-nombre">Límites</p>
-        <p class="pilar-desc">
-          Lo que no sabe hacer, dónde se equivoca y qué no deberías darle
-          nunca.
-        </p>
-      </article>
+        <div class="porques-bloque">
+          <h3 class="rotulo">Cuándo se publican</h3>
+          <dl class="calendario">
+            <div>
+              <dt>Instagram, TikTok y YouTube Shorts</dt>
+              <dd>Domingo, miércoles y viernes · <span class="hora">18:00</span></dd>
+            </div>
+            <div>
+              <dt>LinkedIn</dt>
+              <dd>Lunes, miércoles y viernes · <span class="hora">19:00</span>, con un texto más profesional</dd>
+            </div>
+          </dl>
+        </div>
 
-      <article class="pilar-card pilar-violeta">
-        <p class="pilar-nombre">Estudiar</p>
-        <p class="pilar-desc">
-          Usarla para aprender de verdad, en vez de para que te haga los
-          deberes.
-        </p>
-      </article>
+      </div>
 
+      <figure class="reel" id="reel-disquete">
+        <div class="reel-marco">
+
+          <!-- Hasta el estreno. Bórralo cuando pongas el vídeo. -->
+          <div class="reel-pronto">
+            <svg class="reel-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 3h11l5 5v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/>
+              <path d="M7 3v5h8V3"/>
+              <rect x="7" y="13" width="10" height="8" rx="1"/>
+            </svg>
+            <p class="reel-estreno">
+              Se estrena el <time datetime="2026-11-08T18:00">domingo 8 de noviembre a las 18:00</time>.
+            </p>
+            <p class="reel-mientras">Mientras tanto, la serie está en mis redes.</p>
+          </div>
+
+          <!-- Cuando tengas el vídeo, quita estas dos líneas de comentario:
+          <video controls preload="none" playsinline width="720" height="1280"
+                 poster="reels/disquete.jpg" aria-labelledby="reel-titulo">
+            <source src="reels/disquete.mp4" type="video/mp4">
+            Tu navegador no puede reproducir el vídeo:
+            <a href="reels/disquete.mp4">descárgalo aquí</a>.
+          </video>
+          -->
+        </div>
+
+        <figcaption>
+          <span class="reel-num">Episodio 1</span>
+          <span class="reel-titulo" id="reel-titulo">¿Por qué el icono de guardar es un disquete?</span>
+        </figcaption>
+
+        <!-- Y estas dos también, pegando el guion dentro:
+        <details class="reel-guion">
+          <summary>Leer el guion</summary>
+          <p>…</p>
+        </details>
+        -->
+      </figure>
     </div>
 
     <div class="serie-btns">
-      <a href="divulgacion.html" class="btn-primary">
-        Ver las publicaciones
-        <span aria-hidden="true">→</span>
-      </a>
-      <a href="https://www.instagram.com/marcosdevmartinez/" class="btn-outline" target="_blank" rel="noopener noreferrer">
-        Instagram
-      </a>
-      <a href="https://www.tiktok.com/@marcosdevmartinez" class="btn-outline" target="_blank" rel="noopener noreferrer">
-        TikTok
-      </a>
-      <a href="https://www.youtube.com/@marcosdevmartinez" class="btn-outline" target="_blank" rel="noopener noreferrer">
-        YouTube
-      </a>
+      <a href="https://www.instagram.com/marcosdevmartinez/" class="btn-outline" target="_blank" rel="noopener noreferrer"
+         aria-label="Instagram, se abre en una pestaña nueva">Instagram</a>
+      <a href="https://www.tiktok.com/@marcosdevmartinez" class="btn-outline" target="_blank" rel="noopener noreferrer"
+         aria-label="TikTok, se abre en una pestaña nueva">TikTok</a>
+      <a href="https://www.youtube.com/@marcosdevmartinez" class="btn-outline" target="_blank" rel="noopener noreferrer"
+         aria-label="YouTube, se abre en una pestaña nueva">YouTube</a>
+      <a href="https://www.linkedin.com/in/marcos-dev-martinez" class="btn-outline" target="_blank" rel="noopener noreferrer"
+         aria-label="LinkedIn, se abre en una pestaña nueva">LinkedIn</a>
+    </div>
+  </section>
+
+  <div class="divider" role="separator"></div>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SERVICIOS (desde el 07/11/2026)
+       Va entre Divulgación y Contacto a propósito: primero se ve la serie
+       (la prueba de que sé hacerlo) y justo debajo la oferta. El botón
+       lleva al formulario, que está a un paso, y rellena el asunto (ver el
+       bloque 8 del script). Sin JavaScript, el botón baja igual al formulario.
+       Sin precios: cada presupuesto se hace a medida.
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="servicios" aria-labelledby="services-title">
+    <p class="section-label">06 — Servicios</p>
+    <h2 class="section-title" id="services-title">Reels animados para tu negocio</h2>
+    <p class="section-sub">
+      Vídeos verticales de 45 a 60 segundos para Instagram, TikTok y YouTube
+      Shorts: guion con gancho, animación, voz y subtítulos. Los hago con IA y
+      los reviso a mano, frase a frase.
+    </p>
+
+    <div class="servicio-grid fade-in">
+      <div>
+        <h3 class="rotulo">Qué incluye</h3>
+        <ul class="incluye">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>Guion con gancho</strong>, pensado para que nadie pase de largo en el primer segundo.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>Animación</strong> con los colores de tu marca.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>Voz en off y subtítulos</strong> palabra a palabra.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>El texto para publicarlo</strong> en cada red.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="servicio-caja">
+        <h3 class="rotulo">Un ejemplo</h3>
+        <p>
+          El primer episodio de «Porqués tech»,
+          <a href="#reel-disquete">¿Por qué el icono de guardar es un disquete?</a>,
+          está hecho exactamente así.
+        </p>
+        <p class="servicio-pregunta">¿Te encaja?</p>
+        <p>Cuéntame qué haces y qué quieres explicar. Te respondo en menos de 24 horas.</p>
+        <a href="#contacto" class="btn-primary" data-asunto="Presupuesto de reels">
+          Pedir presupuesto
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1626,7 +1829,7 @@
 
   <!-- CONTACTO -->
   <section id="contacto" aria-labelledby="contact-title">
-    <p class="section-label">06 — Contacto</p>
+    <p class="section-label">07 — Contacto</p>
     <h2 class="section-title" id="contact-title">Hablemos</h2>
 
     <div class="contact-grid fade-in">
@@ -1686,7 +1889,7 @@
              los enlaces son las tres pastillas de dentro, cada una con su
              nombre escrito y 44 px de alto como mínimo para el dedo. -->
         <div class="contact-divulga" role="group" aria-labelledby="divulga-titulo">
-          <span class="ci-label" id="divulga-titulo">Divulgación · Trastea IA</span>
+          <span class="ci-label" id="divulga-titulo">Trastea IA · «Porqués tech»</span>
           <span class="ci-valor">@marcosdevmartinez</span>
           <div class="divulga-redes">
             <a href="https://www.instagram.com/marcosdevmartinez/" target="_blank" rel="noopener noreferrer">
@@ -1757,7 +1960,8 @@
         <a href="#habilidades">Habilidades</a>
         <a href="#proyectos">Proyectos</a>
         <a href="#certificaciones">Certificaciones</a>
-        <a href="divulgacion.html">Divulgación</a>
+        <a href="#divulgacion">Divulgación</a>
+        <a href="#servicios">Servicios</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
@@ -2009,6 +2213,20 @@
         tarjeta.classList.add('cert-caducado');
         var li = tarjeta.closest('li');
         if (li && li.parentNode) li.parentNode.appendChild(li);
+      });
+    });
+
+    // ── 8. «Pedir presupuesto» rellena el asunto ─────────────────
+    // El botón de Servicios baja al formulario (eso lo hace el enlace
+    // solo, también sin JavaScript). Esto además escribe el asunto, si
+    // está vacío, para que sepas de qué va el mensaje sin abrirlo.
+    bloque('presupuesto', function () {
+      var asunto = document.getElementById('asunto');
+      if (!asunto) return;
+      document.querySelectorAll('a[data-asunto]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (!asunto.value.trim()) asunto.value = a.getAttribute('data-asunto');
+        });
       });
     });
 
