@@ -1,0 +1,173 @@
+/* ═══════════════════════════════════════════════════════════════
+   SISTEMA DE ANIMACIÓN
+   Tres reglas:
+   1. Por defecto TODO se ve. El estado oculto solo existe si hay JS
+      (clase .js en <html>) y si la persona no ha pedido menos
+      movimiento en su sistema.
+   2. Solo se animan transform, opacity y clip-path: el navegador los
+      resuelve en la tarjeta gráfica sin recalcular el diseño, y así se
+      mantienen los 60 fps en un móvil normal.
+   3. Una animación con intención por sección, no diez.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Variables de movimiento ─────────────────────────────────────
+   Móvil primero: duraciones más cortas y menos escalonado. */
+:root {
+  --ease-out: cubic-bezier(.2, .7, .2, 1);   /* sale rápido y frena suave */
+  --dur-1: 300ms;    /* detalles: hover, menú */
+  --dur-2: 450ms;    /* entradas normales */
+  --dur-3: 550ms;    /* entradas grandes */
+  --stagger: 50ms;   /* retraso entre elementos de un grupo */
+  --distancia: 16px; /* cuánto sube un fade-up */
+}
+@media (min-width: 769px) {
+  :root {
+    --dur-2: 550ms;
+    --dur-3: 700ms;
+    --stagger: 70ms;
+    --distancia: 24px;
+  }
+}
+
+/* ── Aparición al hacer scroll: [data-reveal] ────────────────────
+   reveal.js añade .is-visible cuando el elemento entra en pantalla.
+   El retraso sale de --i (data-delay o la posición en un grupo
+   [data-stagger]) multiplicado por --stagger. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    transition:
+      opacity var(--dur-2) var(--ease-out),
+      transform var(--dur-2) var(--ease-out),
+      clip-path var(--dur-3) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * var(--stagger));
+  }
+  .js [data-reveal="fade-up"]:not(.is-visible) { opacity: 0; transform: translateY(var(--distancia)); }
+  .js [data-reveal="fade"]:not(.is-visible)    { opacity: 0; }
+  .js [data-reveal="scale"]:not(.is-visible)   { opacity: 0; transform: scale(.94); }
+  /* clip: se descubre de abajo arriba, como una persiana. */
+  .js [data-reveal="clip"]:not(.is-visible)    { clip-path: inset(100% 0 0 0); }
+  .js [data-reveal="clip"].is-visible          { clip-path: inset(0 0 0 0); }
+}
+
+/* ── Menú que se esconde al bajar y vuelve al subir ──────────── */
+.site-nav { transition: transform var(--dur-1) var(--ease-out); }
+.site-nav.nav-oculta { transform: translateY(-100%); }
+
+/* ── Detalles de interacción ─────────────────────────────────── */
+.btn-primary, .btn-outline, .btn-submit {
+  transition: background-color var(--dur-1), color var(--dur-1),
+              border-color var(--dur-1), transform 150ms;
+}
+@media (hover: hover) {
+  .btn-primary:hover, .btn-outline:hover, .btn-submit:hover { transform: translateY(-2px); }
+}
+.nav-links a { transition: color 200ms; }
+.nav-hamburger span { transition: transform 250ms, opacity 250ms; }
+.skip-link { transition: transform 200ms; }
+
+/* ── Barra de progreso ligada al scroll, solo con CSS ────────────
+   animation-timeline: scroll() hace que la animación no dependa del
+   tiempo sino de cuánto has bajado. Si el navegador no lo entiende,
+   se salta este bloque y nav.js mueve la barra con --progreso. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .progreso {
+      animation: progreso-lectura linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+@keyframes progreso-lectura {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ── 1 · Pantalla de carga ───────────────────────────────────────
+   Oculta por defecto. Solo aparece con .js + .con-carga (las pone el
+   script del <head> antes de pintar). Columnas azules que suben desde
+   el centro; el número va en JetBrains Mono, abajo a la izquierda. */
+.carga { display: none; }
+.js.con-carga { overflow: hidden; }                 /* sin scroll mientras carga */
+.js.con-carga .carga {
+  display: block;
+  position: fixed; inset: 0; z-index: 300;
+  color: var(--text);
+}
+.carga-columnas { position: absolute; inset: 0; display: flex; }
+.carga-columnas span {
+  flex: 1;
+  background: var(--blue);
+  margin-left: -1px;                                  /* sin rendijas entre columnas */
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+.carga-columnas span:nth-child(n + 5) { display: none; }   /* 4 en móvil */
+@media (min-width: 769px) {
+  .carga-columnas span:nth-child(n + 5) { display: block; } /* 6 en escritorio */
+}
+.carga-marca {
+  position: absolute; top: 20px; left: var(--gutter);
+  font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px;
+}
+.carga-cifra {
+  position: absolute; left: var(--gutter); bottom: 2.5rem;
+  font-family: var(--font-mono); font-weight: 500;
+  font-size: clamp(4.5rem, 24vw, 15rem);
+  line-height: 0.8; letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+.carga-pct { font-size: 0.35em; vertical-align: top; margin-left: 0.15em; }
+.carga-barra {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+  background: var(--text);
+  transform-origin: 0 50%; transform: scaleX(0);
+}
+
+/* ── 2 · Portada: estados de partida ─────────────────────────────
+   Solo con JS y movimiento. hero.js parte el nombre en letras, las
+   esconde bajo su máscara y pone .partido; hasta entonces el h1 no se
+   pinta, para que no se vea un instante entero y luego desaparezca. */
+.js.movimiento .hero-name:not(.partido) { visibility: hidden; }
+.js.movimiento .hero-sube { opacity: 0; }
+
+/* ── 3 · Lenis (scroll suave) ────────────────────────────────────
+   Lenis pone estas clases en <html>. El scroll suave de CSS se apaga
+   mientras Lenis manda, o los dos se pelearían. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+
+/* «Pausar animaciones»: también para las animaciones hechas con CSS. */
+.pausado *, .pausado *::before, .pausado *::after { animation-play-state: paused !important; }
+
+/* ── Movimiento reducido ─────────────────────────────────────────
+   Red de seguridad para todo lo demás: cualquier animación o
+   transición que quede termina al instante. La barra de progreso
+   sigue funcionando (nav.js la mueve sin animar). */
+/* ── Ficha de proyecto: entra y sale con opacidad y transform ──── */
+@media (prefers-reduced-motion: no-preference) {
+  .ficha, .ficha::backdrop {
+    transition:
+      opacity 0.3s var(--ease-out),
+      transform 0.45s var(--ease-out),
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+  }
+  .ficha { opacity: 0; transform: translateY(32px) scale(0.985); }
+  .ficha[open] { opacity: 1; transform: none; }
+  .ficha::backdrop { opacity: 0; }
+  .ficha[open]::backdrop { opacity: 1; }
+  @starting-style {
+    .ficha[open] { opacity: 0; transform: translateY(32px) scale(0.985); }
+    .ficha[open]::backdrop { opacity: 0; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}

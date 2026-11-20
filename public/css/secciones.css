@@ -1,0 +1,461 @@
+/* ═══════════════════════════════════════════════════════════════
+   ESTILOS DE CADA SECCIÓN, en el mismo orden que la página.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Portada ─────────────────────────────────────────────────────
+   El nombre ocupa todo el ancho útil: el tamaño de letra se calcula
+   para que «MARTÍNEZ» (la palabra larga, 5,15 veces su tamaño de letra
+   en Inter 900) quepa justa. Con CSS y no con JS: así no hay saltos
+   (CLS) cuando carga la página. 26vh limita la altura en pantallas
+   bajas, como un móvil girado. */
+#inicio {
+  --ancho-hero: 90vw;
+  position: relative; overflow: hidden;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(var(--nav-h) + 2rem) var(--gutter) 3rem;
+}
+@media (min-width: 769px) {
+  #inicio { --ancho-hero: 80vw; padding-bottom: 3.5rem; }
+}
+.hero-dots {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.5;
+}
+.hero-glow {
+  position: absolute; top: 20%; right: 5%;
+  width: min(500px, 90vw); aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(97, 142, 241, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+/* El contenido va por encima de los puntos y el brillo. */
+.hero-contenido { position: relative; z-index: 1; }
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-mono); font-size: 0.875rem; color: var(--accent);
+}
+.hero-eyebrow::before { content: ''; width: 32px; height: 2px; background: var(--accent); }
+
+.hero-name {
+  font-size: min(calc(var(--ancho-hero) / 5.3), 26vh);
+  font-weight: 900; line-height: 0.9; letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin: 1rem 0 1.5rem;
+}
+/* Altura fija de cada línea: al partirla en letras no cambia de alto
+   y no empuja lo de abajo (CLS 0). */
+.hero-linea { display: block; height: 0.9em; white-space: nowrap; }
+.hero-apellido { color: var(--accent); margin-top: 0.12em; }   /* aire para la tilde de la Í */
+/* Cada letra va dentro de una máscara (overflow oculto) y sube desde
+   debajo. El padding de arriba deja sitio a la tilde de la Í. */
+.letra-mascara {
+  display: inline-block; vertical-align: top; overflow: hidden;
+  padding-top: 0.14em; margin-top: -0.14em;
+}
+.letra { display: inline-block; }
+
+.hero-pie { display: grid; gap: 2rem; }
+@media (min-width: 900px) {
+  .hero-pie { grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 2rem 4rem; }
+}
+.hero-role {
+  font-family: var(--font-mono); font-weight: 500;
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+}
+/* Intercambio de letras: caja con overflow oculto y dos copias. */
+.giro { display: inline-block; position: relative; overflow: hidden; vertical-align: bottom; }
+.giro-a, .giro-b { display: block; }
+.giro-b { position: absolute; inset: 0; }
+
+.hero-desc { max-width: 560px; color: var(--text-muted); font-size: 1rem; line-height: 1.8; }
+.hero-desc strong { color: var(--text); }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 2rem; }
+.hero-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); }
+.hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+
+/* ── 01 Sobre mí ─────────────────────────────────────────────── */
+.about-grid { display: grid; gap: 2.5rem; align-items: start; }
+.about-grid > * { min-width: 0; }
+.about-text p { color: var(--text-muted); line-height: 1.85; margin-bottom: 1rem; font-size: 0.95rem; }
+.about-text p strong { color: var(--text); }
+.about-lateral {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem; align-items: start;
+}
+/* Foto cuadrada del ancho de una columna, con el radio de las tarjetas. */
+.about-foto {
+  grid-column: 1; margin: 0; line-height: 0; overflow: hidden;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-card);
+}
+.about-foto img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.about-stats {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem;
+}
+.about-stats > * { min-width: 0; }
+.stat-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.25rem;
+}
+.stat-num { font-size: 2.2rem; font-weight: 900; color: var(--accent); letter-spacing: -1px; line-height: 1.2; }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+.normativa-box {
+  margin-top: 1.5rem;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+}
+.normativa-box h3 { font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 0.6rem; }
+.normativa-box p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+@media (min-width: 769px) {
+  .about-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .stat-card { padding: 1.5rem; }
+}
+
+/* ── 02 Habilidades ──────────────────────────────────────────── */
+#habilidades { background: var(--bg-card); }
+.tech-group + .tech-group { margin-top: 2.75rem; }
+.tech-list {
+  list-style: none; display: grid; gap: 0.85rem;
+  /* min(240px, 100%): nunca más ancha que una pantalla de 320 px. */
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+}
+.tech-item {
+  display: flex; align-items: flex-start; gap: 0.9rem;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1rem 1.1rem;
+  transition: border-color 200ms;
+}
+.tech-item:hover { border-color: var(--accent); }
+.tech-icon { flex: 0 0 auto; display: flex; color: var(--accent2); margin-top: 2px; }
+.tech-icon svg { width: 22px; height: 22px; }
+.tech-body { min-width: 0; }
+.tech-name { display: block; font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+.tech-note { display: block; font-size: 0.78rem; color: var(--text-muted); line-height: 1.45; margin-top: 0.2rem; }
+
+/* ── 03 Proyectos ────────────────────────────────────────────── */
+.projects-grid {
+  display: grid; gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+}
+.projects-grid > * { min-width: 0; }
+.project-card {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 200ms, transform 200ms var(--ease-out), box-shadow 200ms;
+}
+@media (hover: hover) {
+  .project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(97, 142, 241, 0.1);
+  }
+}
+.project-img { aspect-ratio: 16 / 9; background: var(--bg-card2); overflow: hidden; flex-shrink: 0; }
+.project-img img { width: 100%; height: 100%; object-fit: cover; }
+.project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.85rem; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+  background: rgba(97, 142, 241, 0.1); color: var(--accent2);
+  border: 1px solid rgba(97, 142, 241, 0.2);
+  padding: 0.2rem 0.6rem; border-radius: 4px;
+}
+.project-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+.project-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; flex: 1; overflow-wrap: anywhere; }
+.project-links { margin-top: 1.25rem; display: flex; align-items: center; gap: 0.5rem 1.15rem; flex-wrap: wrap; }
+.project-link, .project-code {
+  display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px;
+  font-size: 0.85rem; font-weight: 600;
+}
+.project-link { color: var(--accent); transition: gap 200ms; }
+.project-link:hover { gap: 0.7rem; }
+.project-code { color: var(--text-muted); transition: color 200ms; }
+.project-code:hover { color: var(--text); }
+.project-link svg { width: 14px; height: 14px; }
+.project-code svg { width: 15px; height: 15px; }
+
+/* Proyecto destacado: ocupa todo el ancho. En el paso 4 se convierte
+   en caso de estudio (problema → decisión → cómo → resultado). */
+.project-destacado { grid-column: 1 / -1; }
+.project-destacado .project-kicker {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem;
+}
+@media (min-width: 900px) {
+  .project-destacado { flex-direction: row; }
+  .project-destacado .project-img { flex: 0 0 58%; aspect-ratio: auto; min-height: 340px; }
+  .project-destacado .project-body { padding: 2rem; justify-content: center; }
+  .project-destacado .project-title { font-size: 1.5rem; }
+}
+
+.project-kicker {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;
+}
+
+/* «Saber más»: su ::after cubre toda la tarjeta, así que pulsar en
+   cualquier parte abre la ficha. Los enlaces quedan por encima. */
+.project-card { position: relative; }
+.project-card:has(.project-ficha) { cursor: pointer; }
+.project-link, .project-code { position: relative; z-index: 2; }
+.project-ficha {
+  display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px;
+  margin-left: auto; padding: 0; background: none; border: 0; cursor: pointer;
+  font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--text);
+}
+.project-ficha::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.project-ficha .mas {
+  display: inline-grid; place-items: center; width: 24px; height: 24px;
+  border: 1px solid var(--border-input); border-radius: 50%;
+  transition: transform 250ms var(--ease-out), border-color 200ms;
+}
+@media (hover: hover) {
+  .project-card:hover .project-ficha .mas { transform: rotate(90deg); border-color: var(--accent); }
+}
+.project-card:has(.project-ficha:focus-visible) { border-color: var(--accent2); }
+
+/* Hechos con IA */
+.proyectos-ia { margin-top: 3.5rem; }
+.proyectos-ia-nota { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; max-width: 620px; margin: -0.25rem 0 1.5rem; }
+
+/* ── Ficha de proyecto (<dialog>) ─────────────────────────────── */
+html:has(.ficha[open]) { overflow: hidden; }
+.ficha {
+  width: min(800px, calc(100% - 2rem)); max-width: none;
+  max-height: calc(100dvh - 3rem); margin: auto; padding: 0;
+  background: var(--bg-card); color: var(--text);
+  border: 1px solid var(--border); border-radius: 18px;
+  overflow-y: auto; overscroll-behavior: contain;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+.ficha::backdrop { background: rgba(6, 7, 10, 0.8); }
+.ficha-caja { padding: 0 clamp(1.25rem, 4vw, 2.75rem) clamp(1.75rem, 4vw, 2.75rem); }
+.ficha-barra {
+  position: sticky; top: 0; z-index: 1;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1rem 0 0.75rem; background: var(--bg-card);
+}
+.ficha-tipo {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent); line-height: 1.5;
+}
+.ficha-cerrar {
+  flex: 0 0 auto; display: grid; place-items: center; width: 44px; height: 44px;
+  margin-right: -0.4rem; border-radius: 50%; cursor: pointer;
+  background: var(--bg); color: var(--text); border: 1px solid var(--border-input);
+  transition: border-color 200ms, transform 250ms var(--ease-out);
+}
+.ficha-cerrar:hover { border-color: var(--accent); transform: rotate(90deg); }
+.ficha-titulo {
+  font-size: clamp(1.75rem, 5vw, 2.6rem); font-weight: 900; line-height: 1.05;
+  letter-spacing: -0.03em; margin-top: 0.4rem; overflow-wrap: anywhere;
+}
+.ficha-resumen { margin-top: 0.9rem; font-size: 1.02rem; line-height: 1.7; max-width: 62ch; }
+.ficha-img {
+  margin-top: 1.6rem; aspect-ratio: 16 / 9; overflow: hidden;
+  border-radius: var(--radius); background: var(--bg-card2);
+}
+.ficha-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ficha-capturas {
+  aspect-ratio: auto; display: flex; justify-content: center; gap: clamp(0.75rem, 3vw, 1.75rem);
+  padding: clamp(1rem, 3vw, 1.75rem); background: #0D1328;
+}
+.ficha-capturas img { width: min(240px, 44%); height: auto; border-radius: 22px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
+.ficha-cols { display: grid; gap: 1.75rem 2.75rem; margin-top: 2rem; }
+@media (min-width: 700px) { .ficha-cols { grid-template-columns: 1fr 1fr; } }
+.ficha-cols h3 {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted);
+  padding-bottom: 0.6rem; margin-bottom: 0.9rem; border-bottom: 1px solid var(--border);
+}
+.ficha-cols ul { list-style: none; display: grid; gap: 0.7rem; }
+.ficha-cols li { position: relative; padding-left: 1.1rem; font-size: 0.92rem; line-height: 1.65; color: #C3C8CF; }
+.ficha-cols li::before {
+  content: ""; position: absolute; left: 0; top: 0.78em;
+  width: 7px; height: 2px; background: var(--accent);
+}
+.ficha-siguiente {
+  margin-top: 1.75rem; padding: 0.9rem 1.1rem; font-size: 0.9rem; line-height: 1.6;
+  background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  border-radius: var(--radius); color: #C3C8CF;
+}
+.ficha-pie {
+  margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--border);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem;
+}
+.ficha-pie .project-tags { margin: 0; }
+.ficha-enlaces { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.25rem; }
+.ficha-nota { font-size: 0.85rem; color: var(--text-muted); }
+
+/* En el móvil la ficha sube desde abajo y ocupa casi toda la pantalla. */
+@media (max-width: 640px) {
+  .ficha {
+    width: 100%; max-height: 92dvh; margin: auto 0 0;
+    border-radius: 18px 18px 0 0; border-bottom: 0;
+  }
+}
+
+/* ── 04 Certificaciones ──────────────────────────────────────── */
+#certificaciones { background: var(--bg-card); }
+/* auto-fill y no auto-fit: con una sola tarjeta no se estira a todo
+   el ancho (un curso de iniciación no debe ocupar 1200 px). */
+.certs-grid {
+  list-style: none; display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
+}
+.certs-grid > li { min-width: 0; }
+a.cert-card {
+  display: flex; align-items: flex-start; gap: 0.9rem; height: 100%;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.15rem 1.25rem;
+  transition: border-color 200ms, background-color 200ms;
+}
+a.cert-card:hover { border-color: var(--accent); background: var(--bg-card2); }
+.cert-icon { flex: 0 0 auto; display: flex; margin-top: 2px; color: var(--accent2); }
+.cert-icon svg { width: 24px; height: 24px; }
+.cert-cuerpo { min-width: 0; flex: 1 1 auto; }
+.cert-nombre { display: block; font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+.cert-emisor { display: block; font-size: 0.82rem; color: var(--text-muted); margin-top: 0.15rem; }
+.cert-pie {
+  display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
+  margin-top: 0.7rem; padding-top: 0.7rem; border-top: 1px solid var(--border);
+}
+.cert-meta { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); line-height: 1.6; }
+.cert-validez { display: block; }
+.cert-meta time { white-space: nowrap; }
+/* Caducado: se apaga con color y borde discontinuo, NO con opacity
+   (bajaría el contraste del texto por debajo de 4,5:1). */
+a.cert-caducado { border-style: dashed; }
+.cert-caducado .cert-icon, .cert-caducado .cert-nombre { color: var(--text-muted); }
+.cert-verificar {
+  display: inline-flex; align-items: center; gap: 0.35rem; margin-left: auto;
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; white-space: nowrap; color: var(--accent);
+}
+.cert-verificar svg { width: 11px; height: 11px; }
+
+/* ── 05 Porqués tech ─────────────────────────────────────────── */
+.serie-datos { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+.serie-dato {
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 999px; padding: 0.35rem 0.85rem;
+}
+.porques-grid { display: grid; gap: 2.5rem; align-items: start; margin-bottom: 2.75rem; }
+.porques-grid > * { min-width: 0; }
+.porques-bloque + .porques-bloque { margin-top: 2.5rem; }
+.porques-lista { list-style: none; display: grid; gap: 0.6rem; margin-bottom: 1.1rem; }
+.porques-lista li {
+  position: relative; padding-left: 1.2rem;
+  font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;
+}
+.porques-lista li::before {
+  content: ""; position: absolute; left: 0; top: 0.62em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+.porques-nota { font-size: 0.9rem; color: var(--text-muted); line-height: 1.75; }
+.porques-nota strong { color: var(--text); font-weight: 600; }
+/* El número lo pone la propia lista: el lector de pantalla no lo repite. */
+.episodios { list-style: decimal-leading-zero; padding-left: 2.4rem; display: grid; gap: 0.7rem; }
+.episodios li { font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.5; padding-left: 0.3rem; }
+.episodios li::marker { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--accent); }
+.calendario { display: grid; gap: 0.75rem; }
+.calendario > div {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); border-radius: var(--radius);
+  padding: 0.95rem 1.1rem;
+}
+.calendario dt { font-size: 0.92rem; font-weight: 600; color: var(--text); }
+.calendario dd { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem; line-height: 1.55; }
+.calendario .hora { font-family: var(--font-mono); color: var(--accent2); }
+.serie-btns { display: flex; gap: 0.75rem 1rem; flex-wrap: wrap; }
+
+/* El reel: marco vertical 9:16, como se ve en el móvil. */
+.reel { margin: 0 auto; width: 100%; max-width: 280px; }
+.reel-cabecera { margin: 0 0 0.9rem; }
+.reel-num {
+  display: block; font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+}
+.reel-titulo { display: block; font-size: 0.95rem; font-weight: 600; color: var(--text); margin-top: 0.2rem; line-height: 1.4; }
+.reel-marco {
+  position: relative; aspect-ratio: 9 / 16; overflow: hidden;
+  border: 1px solid var(--border); border-radius: 20px; background: var(--bg-card);
+}
+.reel-marco video { width: 100%; height: 100%; object-fit: cover; background: #000; }
+.reel-nota { margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
+.reel-guion { margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-muted); }
+.reel-guion summary { cursor: pointer; color: var(--accent2); font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+.reel-guion p { margin-top: 0.6rem; line-height: 1.7; }
+@media (min-width: 901px) {
+  .porques-grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3.5rem; }
+  .reel { max-width: 300px; }
+}
+
+/* ── 06 Contacto ─────────────────────────────────────────────── */
+.contact-grid { display: grid; gap: 2.5rem; align-items: start; }
+.contact-grid > * { min-width: 0; }
+.contact-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.contact-info p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
+/* Valencia no se puede pulsar: va como texto, no como tarjeta. */
+.contact-lugar { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2rem; }
+.contact-lugar svg { width: 15px; height: 15px; flex: 0 0 auto; }
+.contact-redes {
+  display: grid; gap: 0.75rem; margin-top: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+}
+/* La tarjeta entera es el enlace: área de toque holgada y un solo tabulador. */
+a.contact-item {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.9rem 1rem;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+  transition: border-color 200ms, background-color 200ms;
+}
+a.contact-item:hover { border-color: var(--accent); background: var(--bg-card2); }
+a.contact-item:hover .ci-valor, a.contact-item:hover .ci-icon { color: var(--accent2); }
+.ci-icon { flex: 0 0 auto; display: flex; color: var(--text-muted); }
+.ci-icon svg { width: 18px; height: 18px; }
+.ci-texto { min-width: 0; }
+.ci-label { display: block; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 2px; }
+.ci-valor { display: block; font-size: 0.875rem; color: var(--text); overflow-wrap: anywhere; }
+.contact-divulga {
+  margin-top: 0.75rem; padding: 0.9rem 1rem 1rem;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+}
+.contact-divulga .ci-valor { margin-bottom: 0.8rem; }
+.divulga-redes { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.divulga-redes a {
+  flex: 1 1 auto; justify-content: center;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  min-height: 44px; padding: 0 0.65rem;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  font-size: 0.85rem; font-weight: 500; color: var(--text);
+  transition: border-color 200ms, color 200ms, background-color 200ms;
+}
+.divulga-redes a:hover { border-color: var(--accent); background: var(--bg-card2); color: var(--accent2); }
+.divulga-redes svg { width: 16px; height: 16px; flex: 0 0 auto; }
+
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-rgpd { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.8rem; color: var(--text-muted); }
+.form-rgpd input[type="checkbox"] {
+  width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;
+  cursor: pointer; accent-color: var(--accent);
+}
+.form-rgpd a { color: var(--accent); text-decoration: underline; }
+.btn-submit { align-self: flex-start; }
+@media (min-width: 769px) {
+  .contact-grid { grid-template-columns: 1fr 1.4fr; gap: 4rem; }
+  .form-row { grid-template-columns: 1fr 1fr; }
+}
